@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'pagina.css' %}">
+    <title>Tienda de Productos</title>
+</head>
+<body>
+    <header>
+        <h1>Medicamentos</h1>
+    </header>
+    <main>
+        <section class="productos">
+            <div class="producto">
+                <img src="https://farmaciadelpuebloar.vtexassets.com/arquivos/ids/168373/CREMA-ADERMICINA-A-2X1.jpg?v=638246036177070000" alt="Producto 1">
+                <h2>ADERMICINA</h2>
+                <p>Descripción del adermicina. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <p class="precio">$195.99</p>
+                <button class="btn-comprar">Comprar</button>
+                <div class="producto">
+                    <img src="https://www.ibupirac.com.uy/public/files/productos/ibupirac_pediatrico_4p_60b79c7c72a54.png" alt="Producto 1">
+                    <h2>Ibuprofeno 4%</h2>
+                    <p>Descripción del Producto 1. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    <p class="precio">$19.99</p>
+                    <button class="btn-comprar">Comprar</button>
+                </div>
+                <div class="producto">
+                    <img src="https://www.aspirinetas.com.ar/sites/g/files/vrxlpx31366/files/styles/desktop_1000xauto/public/2021-05/aspirinetas-100mg-new-1.png?itok=dcpJN7Fl" alt="Producto 1">
+                    <h2>Aspirineta</h2>
+                    <p>Descripción del Producto 1. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    <p class="precio">$19.99</p>
+                    <button class="btn-comprar">Comprar</button>
+                </div>
+                <div class="producto">
+                    <img src="https://www.ibupirac.com.uy/public/files/productos/ibupirac_600_60b660d67d7c0.png" alt="Producto 1">
+                    <h2>Ibupirac</h2>
+                    <p>Descripción del Producto 1. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    <p class="precio">$19.99</p>
+                    <button class="btn-comprar">Comprar</button>
+                </div>
+            </div>
+            <!-- Repite el código anterior para los otros 9 productos -->
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2023 Mi Tienda de Productos</p>
+    </footer>
+</body>
+</html>

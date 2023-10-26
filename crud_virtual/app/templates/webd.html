@@ -1,0 +1,29 @@
+{% load static %}
+<html>
+    <head>
+        <title>login</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com"> <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2? family=Mooli&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="{% static 'login.css' %}">
+    </head>
+    <body>        
+        <a href="javascript:history.back()" class="btn-back">Atras</a>
+   
+        <div class="login">
+            
+            <form  action="text" >
+                <h1 >Obra Social</h1>
+                
+                <strong>Usuario:</strong> <input class="extra"  type="text"  placeholder="Ingrese Usuario">
+            
+                <strong> Contraseña:</strong> <input input class="extra" type="password"  placeholder="Ingrese Password" >
+            
+                <button type="submit" >Ingresar</button>
+                <a href="/form.html" class="btn-back">Registrarse</a>
+            
+            </form>
+            <img class="img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSf0znt1EcakoiuLeLH-IHllUvJY7_WUhkW7w&usqp=CAU" alt="">
+        </div>
+        
+    </body>
+</html>

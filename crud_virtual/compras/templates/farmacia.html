@@ -1,0 +1,72 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farmacia XYZ - Tu Salud, Nuestra Prioridad</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'pagina.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Farmacia XYZ</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="acerca.html">Acerca de Nosotros</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+    <section class="hero">
+        <h2>Tu Salud, Nuestra Prioridad</h2>
+        <p>Bienvenido a Farmacia OS, tu fuente confiable de productos de salud y bienestar. Nuestro compromiso es ayudarte a vivir una vida más saludable.</p>
+        
+        <a href="productos.html" class="btn">Explorar Productos</a>
+    </section>
+
+    <section class="productos">
+        <h2>Nuestros Productos Destacados</h2>
+        <div class="producto">
+            <a href="productos.html">
+                <img src="https://media.ahora.com.ar/p/cbc8bd5abb9ae221f752e1d541bddd31/adjuntos/226/imagenes/003/224/0003224069/790x0/smart/medicamentos-farmacia-farmaceuticos-remediosjpg.jpg" alt="Producto 1">
+            </a>
+            <h3>Medicamentos</h3>
+            <p>Amplia gama de medicamentos recetados y de venta libre.</p>
+        </div>
+        <div class="producto">
+            <a href="productos.html">
+                <img src="https://c8.alamy.com/compes/ke850t/suplementos-vitaminicos-ke850t.jpg" alt="Producto 2">
+            </a>
+                <h3>Suplementos</h3>
+                <p>Suplementos vitamínicos y minerales para tu bienestar.</p>
+            
+        </div>
+        <div class="producto">
+            <a href="productos.html">
+                <img src="https://static.onecms.io/wp-content/uploads/sites/21/2023/03/20/Productos-estrella-cuerpo-new.png" alt="Producto 3">
+            </a>
+                <h3>Productos para el cuerpo</h3>
+                <p>Productos de cuidado personal y para la salud en general.</p>
+            
+        </div>
+    </section>
+
+    <section class="acerca">
+        <h2>Acerca de Nosotros</h2>
+        <p>Somos una farmacia comprometida con la salud y el bienestar de nuestra comunidad. Nuestro equipo de profesionales está aquí para asesorarte en tus necesidades de salud y proporcionarte productos de alta calidad.</p>
+    </section>
+
+    <section class="contacto">
+        <h2>Contacto</h2>
+        <p>Estamos ubicados en: <br>
+        Dirección: Calle Principal, Ciudad <br>
+        Teléfono: +123 456 789 <br>
+        Correo Electrónico: info@farmaciaxyz.com</p>
+    </section>
+
+    <footer>
+        <p>&copy; 2023 Farmacia ObraSocial</p>
+    </footer>
+</body>
+</html>

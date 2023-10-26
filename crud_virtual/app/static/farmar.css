@@ -1,0 +1,62 @@
+h1 {
+    font-family: Arial, sans-serif;
+    margin: 2;
+    padding: 2;
+    background-color: #56bc82;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+}
+
+.carousel {
+    display: flex;
+    overflow: hidden;
+    width: 100%;
+    max-width: 800px;
+    margin: 20px auto;
+    position: relative;
+}
+
+.slide {
+    flex: 0 0 100%;
+    transition: transform 0.5s ease;
+}
+
+.slide img {
+    width: 100%;
+}
+.btn btn-primary{
+    background-color: rgb(254, 157, 60);
+    color: white;
+    padding: 0.625rem 1.25rem;
+    border: solid black 0.06em;
+    border-radius: 0.3125em;
+    cursor: pointer;
+    border-radius: 1.5em;
+}
+
+
+button {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin: 10px;
+}
+
+button:focus {
+    outline: none;
+}
+
+#prevBtn {
+    float: left;
+}
+
+#nextBtn {
+    float: right;
+}
