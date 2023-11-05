@@ -1,0 +1,42 @@
+
+{% load django_bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{% bootstrap_messages %}
+
+
+
+{% load static %}  <!-- Agregamos la carga de la biblioteca de etiquetas estáticas -->
+{% load crispy_forms_tags %}
+{% block content %}
+
+<head>
+  <link type="text/css" href="{% static 'styles.css' %}" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+<div style="display: flex; justify-content: center; text-align: center; align-items: center ;background-color: #333; width: 6rem; height: 2rem; border-radius: 4px; margin: 1rem 1rem;">
+  <a href="{% url 'home' %}" class="card-link" style="text-align: center; color: white; text-decoration: none;">Ir al inicio</a>
+</div>
+<div >
+<form  action="" method="post">
+  {% csrf_token %}
+
+
+
+  <div class="align-self-center card mx-auto border-dark mb-3"  style="width: 30rem;">
+    <div class="card-body">
+      <h4 class="card-title">Registro</h4>
+      <hr>
+      {{ form | crispy }}
+      <a href="{% url 'login' %}" class="card-link">Iniciar Sesion</a>
+      <button type="submit" class="btn btn-sm btn-primary float-end btn-dark">Registrarse</button>
+    </div>
+  </div>
+
+
+</form>
+</div>
+
+  {%endblock content%}

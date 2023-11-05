@@ -1,0 +1,61 @@
+{% extends 'home.html' %}
+
+{% load django_bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{% block content %}
+<div style="display: flex; justify-content: start; align-items: center;">
+    <div>
+        <h2 style="padding: 1rem ;">Elige una categoría:</h2>
+    </div>
+    <div class="dropdown">
+        <button class="btn btn-dark dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Categorias
+        </button>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="{% url 'catalogos' categoria='Analgésico' %} ">Analgésico</a></li>
+          <li><a class="dropdown-item" href="{% url 'catalogos' categoria='Jarabe' %}"> Jarabe</a></li>
+          <li><a class="dropdown-item" href="{% url 'catalogos' %}">Todo los productos</a></li>
+        </ul>
+    </div>
+</div>
+
+
+
+
+
+{% if categoria %}
+    <h2>Catálogo de {{ categoria }}</h2>
+    <div class="row">
+        {% for producto in productos %}
+            <div class="col-4" style="padding: 1rem 1rem;">
+                <div class=" card card border-dark mb-3" >
+                    <div class="card-body">
+                        <h5 class="card-title">{{ producto.nombre }}</h5>
+                        <p class="card-text">{{ producto.categoria }}</p>
+                        <p class="card-text">$ {{ producto.precio }}</p>
+                        <a href="{% url 'Add' producto.id %}" class="btn btn-dark">Agregar al carrito</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <h2 style="margin-top: 10px;">Todos los Productos</h2>
+    <div class="row">
+        {% for producto in productos %}
+            <div class="col-4" style="padding: 1rem 1rem;">
+                <div class="card card border-dark mb-3">
+                    <div class="card-body" >
+                        <h5 class="card-title">{{ producto.nombre }}</h5>
+                        <p class="card-text">{{ producto.categoria }}</p>
+                        <p class="card-text">$ {{ producto.precio }}</p>
+                        <a href="{% url 'Add' producto.id %}" class="btn btn-dark">Agregar al carrito</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
+{% endblock content %}

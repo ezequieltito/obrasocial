@@ -1,36 +1,51 @@
 from django.shortcuts import render,redirect
-from django.http import HttpResponse
-from .models import correo
-from django.contrib.auth.forms import UserCreationForm
+from .forms import CustomUserCreationForm 
 from django.contrib.auth import login, authenticate
-from django.urls import reverse
+from django.contrib.auth import logout
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+
+from .forms import CustomUserCreationForm
 
 # Create your views here.
 def index(request):
 
     context={
     }
-    return render(request,'index.html',context)
+    return render(request,'content-home.html',context)
 
 
-def login(request):
-    return render(request,'webd.html')
+def register(request):
+   data = {
+        'form': CustomUserCreationForm()
+    }
+    #validar los campos que vienen del form de register
+   if request.method == 'POST':
+        user_creation_form = CustomUserCreationForm(data=request.POST)
+        if user_creation_form.is_valid():
+            user_creation_form.save()
 
-def registro(request):
-    if request.method == 'POST':
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-            username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password1')
-            user = authenticate(username=username, password=password)
+            messages.success(request, "Inicie sesión para continuar")
+            return redirect('login')
+        else:
+            data['form'] = user_creation_form
+
+            user = authenticate(username=user_creation_form.cleaned_data['username'], password=user_creation_form.cleaned_data['password1'])
             login(request, user)
-            return redirect('webd.html')  # Redirige a la página de inicio de sesión
+            
+   return render(request,'registration/register.html', data)
 
-    else:
-        form = UserCreationForm()
-        
-    return render(request, 'form.html', {'form': form})
+@login_required
+def login(request):
+    return render(request,'login.html')
+
+from django.shortcuts import redirect
+
+
+
+def exit(request):
+    logout(request)
+    return redirect('home')
 
 
 

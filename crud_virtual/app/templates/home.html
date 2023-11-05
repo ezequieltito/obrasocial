@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load django_bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+
+    {% bootstrap_messages %}
+    {% load static %}
+    
+    <title>FARMACIA OS</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'farmar.css' %}">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+    
+
+
+    {% include 'navbar.html' %}
+    
+    {% block content %}
+    {% endblock content %}
+
+    {% block content_1 %}
+    {% endblock content_1 %}
+    
+    {% block content-home%}
+    {% endblock content-home%}
+
+    {% block productos%}
+    {% endblock productos%}
+
+    {% include 'footer.html' %}
+    
+    <!--<a href="farmacia.html" class="btn btn-primary">Pagina1</a> -->
+
+    <!-- <a href="webd.html" class="btn btn-success">loguin</a> -->
+
+
+</html>

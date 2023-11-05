@@ -1,0 +1,50 @@
+{% extends 'home.html' %}
+
+{% load django_bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+
+
+    {% block content %}
+    <h2 style="padding: 1rem ">Tienda</h2>
+    <div class="continer" style="padding: 0rem 3rem;;">
+        
+        <div class="row">
+            <div class="">
+                <div class="row" >
+                    <div >
+                        <div class="row">
+                            {% for producto in productos %}
+                                <div class="col-3">
+                                    <div class="card card border-dark mb-3" style="padding: 1rem 1rem;">
+                                        <div class="card-body">
+                                            <h5 class="card-title">{{producto.nombre}}</h5>
+                                            <p class="card-text">{{producto.categoria}}</p>
+                                            <p class="card-text">$ {{producto.precio}}</p>
+                                            
+                                        
+                                            <!--<a href="{% url 'Add' producto.id %}" class="btn btn-dark">Agregar al carrito</a>-->
+
+                                            <a href="{% url 'Sub' producto.id %}" class="badge btn btn-dark badge-dark">-</a>
+                                            {% for key, value in request.session.carrito.items %}
+                                            <a style="text-decoration: none;">{{ value.cantidad }}</a>
+                                            {% endfor %}
+                                            <a href="{% url 'Add' producto.id %}" class="badge btn btn-dark badge-dark">+</a>
+                                            
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div >
+                
+            </div>
+        </div>
+    </div>
+
+    {% endblock content %}

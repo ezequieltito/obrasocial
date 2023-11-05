@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="row mb-5">
+    {% include 'navbar.html' %}
+</div>
+<div class="row">
+
+
+    <div class="tab-content">
+        <div class="tab-pane fade show active" id="openCaja" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+         
+
+
+        </div>
+        <div class="tab-pane fade" id="closeCaja" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+
+
+
+        </div>
+    </div>
+      
+
+
+    
+     
+
+
+</div>
+
+    <div class="row p-2">
+        <div class="col">
+          <div class="card text-center">
+              <div class="card-header">
+                  <h4 class="card-title">{{ title }} </h4>
+              </div>
+          </div>
+        </div>
+    </div>
+   
+    <div class="row m-5 bg-light">    
+     
+    <table id="tableCajas" class="table table-striped" style="width:100%">
+        <thead>
+            <tr>
+                <th>NroCaja</th>
+                <th>Monto Apertura</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for caja in cajas %}
+            <tr>
+                <td>{{ caja.inrocaja }}</td>
+                <td>{{ caja.fmontoapertura }}</td>
+            </tr>      
+           
+            {% endfor %}
+        </tbody>
+    </table>
+            
+  
+    </div>   
+{% endblock content %}
+{% block javascript %}
+<script>
+    $("#tableCajas").DataTable({
+       searching : true
+    })
+    //new DataTable('#tableCajas');
+   
+   </script>
+{% endblock javascript %}

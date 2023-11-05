@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+        {% load django_bootstrap5 %}
+        {% bootstrap_css %}
+        {% bootstrap_javascript %}
+
+        <!-- {% bootstrap_messages %}  -->
+        {% load static %}
+    <title>Bootstrap demo</title>
+    <link href="{% static 'DataTables/DataTables-1.13.6/css/dataTables.bootstrap5.css' %}" rel="stylesheet">
+  </head>
+  <body>
+    <div class="container">      
+    {% bootstrap_messages %}
+    {% block content %}
+
+    {% endblock content %}
+  </div> 
+  <script src="{% static 'DataTables/jQuery-3.7.0/jquery-3.7.0.js' %}"></script>  
+  <script src="{% static 'DataTables/DataTables-1.13.6/js/jquery.dataTables.js' %}"></script>
+  <!-- <script src="{% static 'DataTables/datatables.min.js' %}"></script>   -->
+  <script src="{% static 'DataTables/DataTables-1.13.6/js/dataTables.bootstrap5.js' %}"></script>  
+</body>
+{% block javascript %}
+
+{% endblock javascript %}
+</html>

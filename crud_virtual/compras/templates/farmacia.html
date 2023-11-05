@@ -1,4 +1,7 @@
+{% extends 'home.html' %}
 {% load static %}
+
+{% block content_1%}
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -7,23 +10,14 @@
     <title>Farmacia XYZ - Tu Salud, Nuestra Prioridad</title>
     <link rel="stylesheet" type="text/css" href="{% static 'pagina.css' %}">
 </head>
+
 <body>
-    <header>
-        <h1>Farmacia XYZ</h1>
-        <nav>
-            <ul>
-                <li><a href="index.html">Inicio</a></li>
-                <li><a href="acerca.html">Acerca de Nosotros</a></li>
-                <li><a href="contacto.html">Contacto</a></li>
-            </ul>
-        </nav>
-    </header>
-    <section class="hero">
-        <h2>Tu Salud, Nuestra Prioridad</h2>
-        <p>Bienvenido a Farmacia OS, tu fuente confiable de productos de salud y bienestar. Nuestro compromiso es ayudarte a vivir una vida más saludable.</p>
+    <div class="hero">
+        <h2 id="">Tu Salud, Nuestra Prioridad</h2>
+        <p id="pp">Bienvenido a Farmacia OS, tu fuente confiable de productos de salud y bienestar. Nuestro compromiso es ayudarte a vivir una vida más saludable.</p>
         
         <a href="productos.html" class="btn">Explorar Productos</a>
-    </section>
+    </div>
 
     <section class="productos">
         <h2>Nuestros Productos Destacados</h2>
@@ -51,22 +45,8 @@
             
         </div>
     </section>
-
-    <section class="acerca">
-        <h2>Acerca de Nosotros</h2>
-        <p>Somos una farmacia comprometida con la salud y el bienestar de nuestra comunidad. Nuestro equipo de profesionales está aquí para asesorarte en tus necesidades de salud y proporcionarte productos de alta calidad.</p>
-    </section>
-
-    <section class="contacto">
-        <h2>Contacto</h2>
-        <p>Estamos ubicados en: <br>
-        Dirección: Calle Principal, Ciudad <br>
-        Teléfono: +123 456 789 <br>
-        Correo Electrónico: info@farmaciaxyz.com</p>
-    </section>
-
-    <footer>
-        <p>&copy; 2023 Farmacia ObraSocial</p>
-    </footer>
 </body>
+
+
 </html>
+{% endblock content_1 %}

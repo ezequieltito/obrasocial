@@ -1,13 +1,16 @@
 from django.urls import path
 from .import views
+from django.contrib import admin
 
 
 urlpatterns = [
     path('',views.index, name='index'),
-    path('index.html',views.index, name='index'),
-    path('webd.html',views.login, name='webd'),
-    path('form.html', views.registro, name='registro'),
-
+    path('admin/', admin.site.urls, name='admin'),
+    path('home/',views.index, name='home'),
+    path('login/',views.login, name='login'),
+    path('register/', views.register, name='register'),
+    path('accounts/profile/', views.index, name='home'),
+    path('logout/', views.exit, name="exit"),
 ]   
 
 
