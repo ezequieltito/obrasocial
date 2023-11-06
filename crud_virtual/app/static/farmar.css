@@ -112,7 +112,7 @@ section h2 {
     color: white;
 }
 
-@media (min-width: 790px) {
+@media (min-width: 795px) {
     .ancho-personalizado {
         width: 25rem;
     }
