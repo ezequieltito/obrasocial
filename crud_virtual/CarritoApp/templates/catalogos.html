@@ -29,33 +29,74 @@
     <h2>Catálogo de {{ categoria }}</h2>
     <div class="row">
         {% for producto in productos %}
-            <div class="col-4" style="padding: 1rem 1rem;">
-                <div class=" card card border-dark mb-3" >
-                    <div class="card-body">
-                        <h5 class="card-title">{{ producto.nombre }}</h5>
-                        <p class="card-text">{{ producto.categoria }}</p>
-                        <p class="card-text">$ {{ producto.precio }}</p>
-                        <a href="{% url 'Add' producto.id %}" class="btn btn-dark">Agregar al carrito</a>
+        <div class="ancho-personalizado" style=" height: auto; padding: 1rem 1rem;">
+            <div class="card card border-dark mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">{{ producto.nombre }}</h5>
+                    <p class="card-text">{{ producto.categoria }}</p>
+                    <p class="card-text">$ {{ producto.precio }}</p>
+                    <div>
+                        <form method="post" action="{% url 'Add' producto.id %}">
+                            {% csrf_token %}
+                            <div class="input-group" style="display: flex; align-items: center;">
+                                <button type="button" class="btn btn-secondary btn-minus">-</button>
+                                <input type="number" id="cantidad-{{ producto.id }}" name="cantidad" value="1" min="1" style="max-width: 60px; margin-left: 2px; margin-right: 4px;">
+                                <button type="button" class="btn btn-secondary btn-plus">+</button>
+                                <button type="submit" class="btn btn-dark" style="margin-left: 10px;">Agregar al carrito</button>
+                            </div>
+
+                        </form>                                      
                     </div>
                 </div>
             </div>
+        </div>
         {% endfor %}
     </div>
 {% else %}
     <h2 style="margin-top: 10px;">Todos los Productos</h2>
     <div class="row">
         {% for producto in productos %}
-            <div class="col-4" style="padding: 1rem 1rem;">
-                <div class="card card border-dark mb-3">
-                    <div class="card-body" >
-                        <h5 class="card-title">{{ producto.nombre }}</h5>
-                        <p class="card-text">{{ producto.categoria }}</p>
-                        <p class="card-text">$ {{ producto.precio }}</p>
-                        <a href="{% url 'Add' producto.id %}" class="btn btn-dark">Agregar al carrito</a>
+        <div class="ancho-personalizado" style=" height: auto; padding: 1rem 1rem;">
+            <div class="card card border-dark mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">{{ producto.nombre }}</h5>
+                    <p class="card-text">{{ producto.categoria }}</p>
+                    <p class="card-text">$ {{ producto.precio }}</p>
+                    <div>
+                        <form method="post" action="{% url 'Add' producto.id %}">
+                            {% csrf_token %}
+                            <div class="input-group" style="display: flex; align-items: center;">
+                                <button type="button" class="btn btn-secondary btn-minus">-</button>
+                                <input type="number" id="cantidad-{{ producto.id }}" name="cantidad" value="1" min="1" style="max-width: 60px; margin-left: 2px; margin-right: 4px;">
+                                <button type="button" class="btn btn-secondary btn-plus">+</button>
+                                <button type="submit" class="btn btn-dark" style="margin-left: 10px;">Agregar al carrito</button>
+                            </div>
+
+                        </form>                                      
                     </div>
                 </div>
             </div>
+        </div>
         {% endfor %}
     </div>
 {% endif %}
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $(".btn-plus").click(function () {
+            var inputElement = $(this).closest(".input-group").find("input");
+            var currentValue = parseInt(inputElement.val());
+            inputElement.val(currentValue + 1);
+        });
+
+        $(".btn-minus").click(function () {
+            var inputElement = $(this).closest(".input-group").find("input");
+            var currentValue = parseInt(inputElement.val());
+            if (currentValue > 1) {
+                inputElement.val(currentValue - 1);
+            }
+        });
+    });
+</script>
 {% endblock content %}

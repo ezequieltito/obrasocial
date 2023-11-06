@@ -89,7 +89,7 @@ WSGI_APPLICATION = 'Proyecto.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'Obra_Social',
+        'NAME': 'obra_social',
         'USER': 'root',
         'PASSWORD': '5973',
         'PORT': '3306',

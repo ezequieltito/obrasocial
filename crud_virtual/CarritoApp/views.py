@@ -8,37 +8,51 @@ from django.contrib.auth.decorators import login_required
 
 
 def catalogo(request, categoria=None):
+    carrito = Carrito(request)
+    cant_productos = carrito.obtener_cantidad_total()  # Obtén la cantidad total desde el objeto Carrito
+
     productos = Producto.objects.all()  # Obtén todos los productos por defecto
 
     if categoria:
         productos = Producto.objects.filter(categoria=categoria)  # Filtra por categoría si se proporciona
 
-    else:
-        productos = Producto.objects.all()
-
     context = {
         'productos': productos,
         'categoria': categoria,
+        'cant_productos': cant_productos,
     }
     return render(request, 'catalogos.html', context)
 
 @login_required
 def carrito(request):
+    carrito = Carrito(request)
+    cant_productos = carrito.obtener_cantidad_total()  # Obtén la cantidad total desde el objeto Carrito
 
-    context={
+    context = {
+        'cant_productos': cant_productos,
     }
-    return render(request,'pagcarrito.html',context)
+
+    return render(request, 'pagcarrito.html', context)
 
 
 def tienda(request):
-     productos = Producto.objects.all()
-     return render(request, "index.html", {'productos':productos})
-    #return HttpResponse("hola")
+    carrito = Carrito(request)
+    cant_productos = carrito.obtener_cantidad_total()  # Obtén la cantidad total desde el objeto Carrito
+
+    productos = Producto.objects.all()
+
+    context = {
+        'productos': productos,
+        'cant_productos': cant_productos,
+    }
+
+    return render(request, "index.html", context)
 
 def agregar_producto(request, producto_id):
     carrito = Carrito(request)
     producto = Producto.objects.get(id=producto_id)
-    carrito.agregar(producto)
+    cantidad = int(request.POST.get('cantidad', 1))  # Obtiene la cantidad del formulario
+    carrito.agregar(producto, cantidad)
 
     return redirect(request.META.get('HTTP_REFERER'))
 

@@ -1,19 +1,21 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render, redirect
 from .forms import CustomUserCreationForm 
 from django.contrib.auth import login, authenticate
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-
 from .forms import CustomUserCreationForm
+from CarritoApp.carrito import Carrito  # Asegúrate de importar la clase Carrito
 
 # Create your views here.
 def index(request):
+    carrito = Carrito(request)
+    cant_productos = carrito.obtener_cantidad_total()  # Obtén la cantidad total desde el objeto Carrito
 
-    context={
+    context = {
+        'cant_productos': cant_productos,
     }
-    return render(request,'content-home.html',context)
-
+    return render(request, 'content-home.html', context)
 
 def register(request):
    data = {

@@ -1,7 +1,15 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+}
+
 body{
     padding:10px 20px;
     background-color: rgb(243, 243, 243);
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: sans-serif;
+    text-transform: capitalize;
 }
 
 #titulo{
@@ -29,48 +37,72 @@ section h2 {
 
 
 
-
-/* Estilo del pie de página */
-footer {
-    background-color: #333;
-    color: #fff;
-    text-align: center;
-    padding: 10px;
-}
-
-/* Estilo para listas */
-ul {
-    list-style: disc;
-    margin-left: 20px;
-}
-
-/* Estilo para párrafos */
-p {
-    line-height: 1.5;
-    margin: 10px 0;
-}
-
-/* Sección de contacto */
-#contacto {
-    background-color: #e0e0e0;
-    color: black;
-    text-align: center;
-    padding: 20px 0;
-}
-#contacto h2 {
-    color: black;
-}
-#contacto p {
-    font-size: 16px;
-}
-
-
 #letra{
     border-radius: 10px;
     padding: 5px;
     display: flex;
     justify-content: flex-start; /* Alinea los elementos hacia la izquierda (valor predeterminado) */
     background-color: #333; /* Establece un color de fondo (opcional) */
+}
+
+
+
+.container{
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer{
+    background-color: #333;
+    padding: 80px 0;
+}
+
+.footer-row{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.footer-links{
+    width: 25%;
+    padding: 0 15px;
+}
+
+.footer-links h4{
+    font-size: 20px;
+    color: white;
+    margin-bottom: 25px;
+    font-weight: 500px;
+    border-bottom: 2px solid blue;
+    padding-bottom: 10px;
+    display: inline-block;
+}
+
+.footer-links ul li a {
+    font-size: 18px;
+    text-decoration: none;
+    color: grey;
+    display: block;
+    margin-bottom: 15px;
+    transition: all .3s ease;
+}
+
+.footer-links ul li a:hover{
+    color: aqua;
+    padding-left: 6px;
+}
+
+.social-link svg{
+    display: inline-block;
+    min-height: 40px;
+    width: 40px;
+    background-color: rgba(255, 255, 255, 0,2);
+    margin: 0 10px 10px 0;
+    text-align: center;
+    line-height: 40px;
+    border-radius: 50%;
+    color: #ffff;
+    transition: all .5s ease;
+
 }
 
 #letra a{
@@ -80,6 +112,8 @@ p {
     color: white;
 }
 
-
-
-
+@media (min-width: 769px) {
+    .ancho-personalizado {
+        width: 25rem;
+    }
+}

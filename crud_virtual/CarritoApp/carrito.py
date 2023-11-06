@@ -9,18 +9,18 @@ class Carrito:
         else:
             self.carrito = carrito
 
-    def agregar(self, producto):
+    def agregar(self, producto, cantidad):
         id = str(producto.id)
         if id not in self.carrito.keys():
-            self.carrito[id]={
-                "producto_id" : producto.id,
-                "nombre" : producto.nombre,
-                "acumulado" : producto.precio,
-                "cantidad" : 1
+            self.carrito[id] = {
+                "producto_id": producto.id,
+                "nombre": producto.nombre,
+                "acumulado": producto.precio * cantidad,  # Actualiza el acumulado
+                "cantidad": cantidad  # Establece la cantidad proporcionada
             }
         else:
-            self.carrito[id]["cantidad"] += 1
-            self.carrito[id]["acumulado"] += producto.precio
+            self.carrito[id]["cantidad"] += cantidad
+            self.carrito[id]["acumulado"] += producto.precio * cantidad  # Actualiza el acumulado
         self.guardar_carrito()
 
     def guardar_carrito(self):
@@ -44,5 +44,8 @@ class Carrito:
     def limpiar(self):
         self.session["carrito"] = {}
         self.session.modified = True
+
+    def obtener_cantidad_total(self):
+        return sum(item['cantidad'] for item in self.carrito.values())
 
     
