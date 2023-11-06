@@ -27,7 +27,7 @@
 
 {% if categoria %}
     <h2>Catálogo de {{ categoria }}</h2>
-    <div class="row">
+    <div class="row justify-content-center">
         {% for producto in productos %}
         <div class="ancho-personalizado" style=" height: auto; padding: 1rem 1rem;">
             <div class="card card border-dark mb-3">
@@ -54,7 +54,7 @@
     </div>
 {% else %}
     <h2 style="margin-top: 10px;">Todos los Productos</h2>
-    <div class="row">
+    <div class="row justify-content-center">
         {% for producto in productos %}
         <div class="ancho-personalizado" style=" height: auto; padding: 1rem 1rem;">
             <div class="card card border-dark mb-3">
@@ -80,6 +80,9 @@
         {% endfor %}
     </div>
 {% endif %}
+
+
+
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>

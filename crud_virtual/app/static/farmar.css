@@ -5,6 +5,7 @@
     list-style: none;
 }
 
+
 body{
     padding:10px 20px;
     background-color: rgb(243, 243, 243);
@@ -45,72 +46,26 @@ section h2 {
     background-color: #333; /* Establece un color de fondo (opcional) */
 }
 
-
-
-.container{
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.footer{
-    background-color: #333;
-    padding: 80px 0;
-}
-
-.footer-row{
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.footer-links{
-    width: 25%;
-    padding: 0 15px;
-}
-
-.footer-links h4{
-    font-size: 20px;
-    color: white;
-    margin-bottom: 25px;
-    font-weight: 500px;
-    border-bottom: 2px solid blue;
-    padding-bottom: 10px;
-    display: inline-block;
-}
-
-.footer-links ul li a {
-    font-size: 18px;
-    text-decoration: none;
-    color: grey;
-    display: block;
-    margin-bottom: 15px;
-    transition: all .3s ease;
-}
-
-.footer-links ul li a:hover{
-    color: aqua;
-    padding-left: 6px;
-}
-
-.social-link svg{
-    display: inline-block;
-    min-height: 40px;
-    width: 40px;
-    background-color: rgba(255, 255, 255, 0,2);
-    margin: 0 10px 10px 0;
-    text-align: center;
-    line-height: 40px;
-    border-radius: 50%;
-    color: #ffff;
-    transition: all .5s ease;
-
-}
-
 #letra a{
     padding: 0px 10px;
     font-size: 20px;
     text-decoration: none;
     color: white;
 }
+
+.banner {
+    max-width: 100%; /* Establece un ancho máximo */
+    height: auto; /* Ajusta la altura automáticamente */
+    text-align: center; /* Centra la imagen horizontalmente */
+}
+
+.img-responsive {
+    width: 100%;
+    height: auto;
+    display: block; /* Elimina cualquier espacio en blanco adicional */
+    margin: 0 auto; /* Centra la imagen horizontalmente */
+}
+
 
 @media (min-width: 795px) {
     .ancho-personalizado {

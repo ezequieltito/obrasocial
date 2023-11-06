@@ -9,18 +9,20 @@ from django.contrib.auth.decorators import login_required
 
 def catalogo(request, categoria=None):
     carrito = Carrito(request)
-    cant_productos = carrito.obtener_cantidad_total()  # Obtén la cantidad total desde el objeto Carrito
-
-    productos = Producto.objects.all()  # Obtén todos los productos por defecto
+    productos = Producto.objects.all()
+    ofertas = Producto.objects.filter(descuento__gt=0)
+    cant_productos = carrito.obtener_cantidad_total()
 
     if categoria:
-        productos = Producto.objects.filter(categoria=categoria)  # Filtra por categoría si se proporciona
+        productos = productos.filter(categoria=categoria)
 
     context = {
         'productos': productos,
         'categoria': categoria,
+        'ofertas': ofertas,
         'cant_productos': cant_productos,
     }
+
     return render(request, 'catalogos.html', context)
 
 @login_required

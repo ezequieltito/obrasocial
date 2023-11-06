@@ -5,15 +5,20 @@ from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .forms import CustomUserCreationForm
+from CarritoApp.models import Producto
 from CarritoApp.carrito import Carrito  # Asegúrate de importar la clase Carrito
 
 # Create your views here.
 def index(request):
     carrito = Carrito(request)
-    cant_productos = carrito.obtener_cantidad_total()  # Obtén la cantidad total desde el objeto Carrito
+    cant_productos = carrito.obtener_cantidad_total()
+
+    # Consulta los productos con descuento (por ejemplo, aquellos con descuento mayor a 0%)
+    productos_con_descuento = Producto.objects.filter(descuento__gt=0)
 
     context = {
         'cant_productos': cant_productos,
+        'productos_con_descuento': productos_con_descuento,  # Pasa los productos con descuento al contexto
     }
     return render(request, 'content-home.html', context)
 

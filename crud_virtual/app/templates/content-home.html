@@ -3,13 +3,38 @@
 
 {% block content-home%}
 <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
   <style>
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+@media (max-width: 768px) {
+    img {
+        width: 100%;
+    }
+}
 /* Estilos para pantallas de escritorio (ancho mayor o igual a 768px) */
 @media (min-width: 768px) {
   #carouselExampleDark {
     width: 70%; /* Establece el ancho que desees en pantallas de escritorio */
     max-width: 1200px; /* Establece el ancho máximo que desees en pantallas de escritorio */
   }
+  .banner {
+    max-width: 100%; /* Establece un ancho máximo */
+    height: auto; /* Ajusta la altura automáticamente */
+    text-align: center; /* Centra la imagen horizontalmente */
+}
+
+.img-responsive {
+    width: 100%;
+    height: auto;
+    display: block; /* Elimina cualquier espacio en blanco adicional */
+    margin: 0 auto; /* Centra la imagen horizontalmente */
+}
 }
 </style>
 </head>
@@ -59,47 +84,64 @@
 
     </div>
 
-    <section>
-      <h2>Quiénes Somos</h2>
-      <p>Somos Farmacia Isdem, una farmacia de renombre que se ha comprometido a brindar atención de salud y bienestar de alta calidad a la comunidad desde 1985. Nuestra dedicación y pasión por el servicio farmacéutico han sido el pilar de nuestra reputación y crecimiento continuo.</p>
-      <p>Nuestro equipo de farmacéuticos altamente capacitados se esfuerza por brindar el mejor asesoramiento y atención al cliente, asegurando que cada paciente reciba la atención personalizada que merece. Valoramos la confianza que has depositado en nosotros a lo largo de los años y estamos comprometidos a mantener los más altos estándares de calidad en cada aspecto de nuestro negocio.</p>
-      <p>En Farmacia Isdem, creemos que la salud es un bien preciado, y estamos aquí para apoyarte en cada paso del camino. Ya sea que necesites medicamentos recetados, productos de cuidado personal o asesoramiento experto, estamos listos para ayudarte a cuidar de tu salud y bienestar de la mejor manera posible.</p>
-    </section>
+    <div>
+    <h1 style="margin-top: 4rem;">Ofertas:</h1>
+    <div class="row justify-content-center">
 
-    <section>
-      <h2>Lo que nos hace especiales</h2>
-      <ul>
-          <li>Productos de calidad: En Farmacia Isdem, nos enorgullecemos de ofrecer una amplia gama de productos farmacéuticos, desde medicamentos de venta libre hasta productos de cuidado personal y bienestar. Trabajamos con los mejores proveedores y marcas para garantizar que encuentres los productos de la más alta calidad.</li>
-          <li>Asesoramiento farmacéutico: Sabemos que a veces necesitas más que un producto; necesitas orientación experta. Nuestros farmacéuticos altamente calificados están disponibles para responder a tus preguntas y proporcionar consejos sobre medicamentos y productos. Tu salud es nuestra prioridad.</li>
-          <li>Envío rápido y seguro: Entendemos que cuando necesitas un producto, no puedes esperar. Nuestro servicio de envío rápido garantiza que tus productos lleguen a tu puerta de manera segura y oportuna, para que puedas disfrutar de la comodidad que te mereces.</li>
-          <li>Ofertas y promociones especiales: En Farmacia Isdem, creemos que cuidar de tu salud no debe ser costoso. Ofrecemos ofertas y promociones especiales para que obtengas los productos que necesitas a precios competitivos y asequibles.</li>
-          <li>Confianza y privacidad: Valoramos tu confianza y privacidad. Nuestra tienda en línea está diseñada para garantizar que tus datos personales estén seguros y protegidos. Puedes comprar con tranquilidad, sabiendo que tus detalles están en buenas manos.</li>
-      </ul>
-    </section>
+      {% for producto in productos_con_descuento %}
+            <div class="ancho-personalizado" style="height: auto; padding: 1rem 1rem;">
+                <div class="card card border-dark mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ producto.nombre }}</h5>
+                        <p class="card-text">{{ producto.categoria }}</p>
+    
+                        <!-- Mostrar precio con descuento -->
+                        <p class="card-text">
+                            <span style="text-decoration: line-through;">$ {{ producto.precio }}</span>
+                            (Descuento: {{ producto.descuento }}%)
+                            <br>
+                            Precio con descuento: $ {{ producto.precio_con_descuento |floatformat:"2" }}
+                        </p>
+    
+                        <div>
+                            <form method="post" action="{% url 'Add' producto.id %}">
+                                {% csrf_token %}
+                                <div class="input-group" style="display: flex; align-items: center;">
+                                    <button type="button" class="btn btn-secondary btn-minus">-</button>
+                                    <input type="number" id="cantidad-{{ producto.id }}" name="cantidad" value="1" min="1" style="max-width: 60px; margin-left: 2px; margin-right: 4px;">
+                                    <button type="button" class="btn btn-secondary btn-plus">+</button>
+                                    <button type="submit" class="btn btn-dark" style="margin-left: 10px;">Agregar al carrito</button>
+                                </div>
+                            </form>                                      
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+  </div>
 
-    <section>
-      <h2>Cómo comprar con nosotros</h2>
-      <p>Comprar en Farmacia Isdem es fácil y conveniente. Navega por nuestro sitio web, busca tus productos y agrégalos a tu carrito de compras. Luego, sigue los sencillos pasos para completar tu pedido. Nuestro equipo estará disponible para ayudarte en cada paso del camino y resolver cualquier consulta que puedas tener.</p>
-    </section>
+  <div class="banner" style="margin-bottom: 4rem; margin-top: 4rem;">
+    <img src="{% static 'img/metodosdepago.jpg' %}" alt="Banner" class="img-responsive">
+  </div>
 
-    <section>
-      <h2>Compras Anticipadas</h2>
-      <p>En Farmacia Isdem, entendemos que la planificación es esencial. Por eso, ofrecemos una sección especial para compras anticipadas. Esto te permite planificar y ordenar tus productos con anticipación, asegurando que siempre tengas lo que necesitas a mano y que no te falte nada en momentos críticos.</p>
-    </section>
+</div>
+ <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $(".btn-plus").click(function () {
+            var inputElement = $(this).closest(".input-group").find("input");
+            var currentValue = parseInt(inputElement.val());
+            inputElement.val(currentValue + 1);
+        });
 
-    <section>
-      <h2>Descuentos con Receta de Obra Social</h2>
-      <p>En Farmacia Isdem, valoramos tu bienestar y tu economía. Si cuentas con una receta de tu obra social, puedes aprovechar descuentos especiales en tus medicamentos y productos farmacéuticos. Nuestro compromiso es hacerte la vida más saludable y asequible, brindándote opciones de ahorro en tu tratamiento médico.</p>
-    </section>
-
-    <section>
-      <h2>Horario de Atención</h2>
-      <p>Nuestra tienda en línea está disponible las 24 horas del día, los 7 días de la semana, para que puedas hacer tus compras en línea cuando más te convenga. Además, también ofrecemos atención telefónica y por correo electrónico durante los siguientes horarios:</p>
-      <ul>
-          <li>Lunes a Viernes: 8:00 AM - 8:00 PM</li>
-          <li>Sábados: 9:00 AM - 5:00 PM</li>
-          <li>Domingos: Cerrado (¡pero puedes hacer tus compras en línea en cualquier momento!)</li>
-      </ul>
-    </section>
- </div>
+        $(".btn-minus").click(function () {
+            var inputElement = $(this).closest(".input-group").find("input");
+            var currentValue = parseInt(inputElement.val());
+            if (currentValue > 1) {
+                inputElement.val(currentValue - 1);
+            }
+        });
+    });
+</script>
  {% endblock content-home%}
