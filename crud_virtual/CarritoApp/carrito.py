@@ -9,36 +9,37 @@ class Carrito:
         else:
             self.carrito = carrito
 
-    def agregar(self, producto, cantidad):
-        id = str(producto.id)
+    def agregar(self, medicamento, cantidad):
+        id = str(medicamento.id_medicamento)
         if id not in self.carrito.keys():
             self.carrito[id] = {
-                "producto_id": producto.id,
-                "nombre": producto.nombre,
-                "acumulado": producto.precio * cantidad,  # Actualiza el acumulado
+                "medicamento_id": medicamento.id_medicamento,
+                "nombre": medicamento.nombre_medicamento,
+                "acumulado": medicamento.precio * cantidad,  # Actualiza el acumulado
                 "cantidad": cantidad  # Establece la cantidad proporcionada
             }
         else:
             self.carrito[id]["cantidad"] += cantidad
-            self.carrito[id]["acumulado"] += producto.precio * cantidad  # Actualiza el acumulado
+            self.carrito[id]["acumulado"] += medicamento.precio * cantidad  # Actualiza el acumulado
         self.guardar_carrito()
 
     def guardar_carrito(self):
         self.session["carrito"] = self.carrito
         self.session.modified = True
 
-    def eliminar(self, producto):
-        id = str(producto.id)
+    def eliminar(self, medicamento):
+        id = str(medicamento.id_medicamento)
         if id in self.carrito:
             del self.carrito[id]
             self.guardar_carrito()
 
-    def restar(self, producto):
-        id = str(producto.id)
+    def restar(self, medicamento):
+        id = str(medicamento.id_medicamento)
         if id in self.carrito.keys():
             self.carrito[id]["cantidad"] -= 1
-            self.carrito[id]["acumulado"] -= producto.precio
-            if self.carrito[id]["cantidad"] <= 0: self.eliminar(producto)
+            self.carrito[id]["acumulado"] -= medicamento.precio
+            if self.carrito[id]["cantidad"] <= 0:
+                self.eliminar(medicamento)
             self.guardar_carrito()
 
     def limpiar(self):
@@ -47,5 +48,3 @@ class Carrito:
 
     def obtener_cantidad_total(self):
         return sum(item['cantidad'] for item in self.carrito.values())
-
-    
