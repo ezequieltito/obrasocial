@@ -1,147 +1,129 @@
 {% extends 'home.html' %}
 {% load static %}
-
-{% block content-home%}
-<head>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <style>
-
-img {
-    max-width: 100%;
-    height: auto;
-}
-
-@media (max-width: 768px) {
-    img {
-        width: 100%;
-    }
-}
-/* Estilos para pantallas de escritorio (ancho mayor o igual a 768px) */
-@media (min-width: 768px) {
-  #carouselExampleDark {
-    width: 70%; /* Establece el ancho que desees en pantallas de escritorio */
-    max-width: 1200px; /* Establece el ancho máximo que desees en pantallas de escritorio */
-  }
-  .banner {
-    max-width: 100%; /* Establece un ancho máximo */
-    height: auto; /* Ajusta la altura automáticamente */
-    text-align: center; /* Centra la imagen horizontalmente */
-}
-
-.img-responsive {
-    width: 100%;
-    height: auto;
-    display: block; /* Elimina cualquier espacio en blanco adicional */
-    margin: 0 auto; /* Centra la imagen horizontalmente */
-}
-}
-</style>
-</head>
-
-<h1 style="padding: 1rem 1rem;">
-  Novedades:
-</h1>
-<div class="content-home" >
-
-
-    
-    <div style="display: flex; justify-content: center; align-items: center; ">
-
+{% block content-home %}
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+      img {
+        max-width: 100%;
+        height: auto;
+      }
+      @media (max-width: 768px) {
+        img {
+          width: 100%;
+        }
+      }
+      @media (min-width: 768px) {
+        #carouselExampleDark {
+          width: 70%;
+          max-width: 1200px;
+        }
+        .banner {
+          max-width: 100%;
+          height: auto;
+          text-align: center;
+        }
+        .img-responsive {
+          width: 100%;
+          height: auto;
+          display: block;
+          margin: 0 auto;
+        }
+      }
+    </style>
+  </head>
+  <h1 style="padding: 1rem 1rem;">
+    Novedades:
+  </h1>
+  <div class="content-home">
+    <div style="display: flex; justify-content: center; align-items: center;">
       <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
-          <div class="carousel-indicators">
-            <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-            <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
-            <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
-          </div>
-          <div class="carousel-inner">
-            <div class="carousel-item active" data-bs-interval="10000">
-              <img src="{% static 'img/uno.jpg' %}" class="d-block w-100" alt="...">
-              <div class="carousel-caption d-none d-md-block">
-              </div>
-            </div>
-            <div class="carousel-item" data-bs-interval="2000">
-              <img src="{% static 'img/dos.jpg' %}" class="d-block w-100" alt="...">
-              <div class="carousel-caption d-none d-md-block">
-              </div>
-            </div>
-            <div class="carousel-item">
-              <img src="{% static 'img/tres.jpg' %}" class="d-block w-100" alt="...">
-              <div class="carousel-caption d-none d-md-block">
-              </div>
-            </div>
-          </div>
-          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-          </button>
-          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-          </button>
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+          <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
+          <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
         </div>
-
-
-    </div>
-
-    <div>
-    <h1 style="margin-top: 4rem;">Ofertas:</h1>
-    <div class="row justify-content-center">
-
-      {% for producto in productos_con_descuento %}
-            <div class="ancho-personalizado" style="height: auto; padding: 1rem 1rem;">
-                <div class="card card border-dark mb-3">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ producto.nombre }}</h5>
-                        <p class="card-text">{{ producto.categoria }}</p>
-    
-                        <!-- Mostrar precio con descuento -->
-                        <p class="card-text">
-                            <span style="text-decoration: line-through;">$ {{ producto.precio }}</span>
-                            (Descuento: {{ producto.descuento }}%)
-                            <br>
-                            Precio con descuento: $ {{ producto.precio_con_descuento |floatformat:"2" }}
-                        </p>
-    
-                        <div>
-                            <form method="post" action="{% url 'Add' producto.id %}">
-                                {% csrf_token %}
-                                <div class="input-group" style="display: flex; align-items: center;">
-                                    <button type="button" class="btn btn-secondary btn-minus">-</button>
-                                    <input type="number" id="cantidad-{{ producto.id }}" name="cantidad" value="1" min="1" style="max-width: 60px; margin-left: 2px; margin-right: 4px;">
-                                    <button type="button" class="btn btn-secondary btn-plus">+</button>
-                                    <button type="submit" class="btn btn-dark" style="margin-left: 10px;">Agregar al carrito</button>
-                                </div>
-                            </form>                                      
-                        </div>
-                    </div>
-                </div>
+        <div class="carousel-inner">
+          <div class="carousel-item active" data-bs-interval="10000">
+            <img src="{% static 'img/uno.jpg' %}" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block">
             </div>
+          </div>
+          <div class="carousel-item" data-bs-interval="2000">
+            <img src="{% static 'img/dos.jpg' %}" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img src="{% static 'img/tres.jpg' %}" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+            </div>
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+          <span class="carousel-control-next-icon" ariahidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    </div>
+    <div>
+      <h1 style="margin-top: 4rem;">Ofertas:</h1>
+      <div class="row justify-content-center">
+        {% for medicamento in medicamentos_con_descuento %}
+        <div class="ancho-personalizado" style="height: auto; padding: 1rem 1rem;">
+          <div class="card card border-dark mb-3">
+            <div class="card-body">
+              <h5 class="card-title">{{ medicamento.nombre_medicamento }}</h5>
+              <p class="card-text">{{ medicamento.categoria }}
+              </p>
+              <!-- Mostrar precio con descuento -->
+              <p class="card-text">
+                <span style="text-decoration: line-through;">$ {{ medicamento.precio }}</span>
+                (Descuento: {{ medicamento.descuento }}%)
+                <br>
+                Precio con descuento: $ {{ medicamento.precio_con_descuento|floatformat:"2" }}
+              </p>
+              <div>
+                <form method="post" action="{% url 'Add' medicamento.id_medicamento %}">
+                  {% csrf_token %}
+                  <div class="input-group" style="display: flex; align-items: center;">
+                    <button type="button" class="btn btn-secondary btn-minus">-</button>
+                    <input type="number" id="cantidad-{{ medicamento.id_medicamento }}" name="cantidad" value="1" min="1" style="max-width: 60px; margin-left: 2px; margin-right: 4px;">
+                    <button type="button" class="btn btn-secondary btn-plus">+</button>
+                    <button type="submit" class="btn btn-dark" style="margin-left: 10px;">Agregar al carrito</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
         {% endfor %}
+      </div>
+    </div>
+    <div class="banner" style="margin-bottom: 4rem; margin-top: 4rem;">
+      <img src="{% static 'img/metodosdepago.jpg' %}" alt="Banner" class="img-responsive">
     </div>
   </div>
-
-  <div class="banner" style="margin-bottom: 4rem; margin-top: 4rem;">
-    <img src="{% static 'img/metodosdepago.jpg' %}" alt="Banner" class="img-responsive">
-  </div>
-
-</div>
- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
     $(document).ready(function () {
-        $(".btn-plus").click(function () {
-            var inputElement = $(this).closest(".input-group").find("input");
-            var currentValue = parseInt(inputElement.val());
-            inputElement.val(currentValue + 1);
-        });
+      $(".btn-plus").click(function () {
+        var inputElement = $(this).closest(".input-group").find("input");
+        var currentValue = parseInt(inputElement.val());
+        inputElement.val(currentValue + 1);
+      });
 
-        $(".btn-minus").click(function () {
-            var inputElement = $(this).closest(".input-group").find("input");
-            var currentValue = parseInt(inputElement.val());
-            if (currentValue > 1) {
-                inputElement.val(currentValue - 1);
-            }
-        });
+      $(".btn-minus").click(function () {
+        var inputElement = $(this).closest(".input-group").find("input");
+        var currentValue = parseInt(inputElement.val());
+        if (currentValue > 1) {
+          inputElement.val(currentValue - 1);
+        }
+      });
     });
-</script>
- {% endblock content-home%}
+  </script>
+{% endblock content-home %}

@@ -1,26 +1,25 @@
 from django.shortcuts import render, HttpResponse
 from .carrito import Carrito
-from .models import Producto
+from .models import Medicamento  # Importa el modelo Medicamento en lugar de Producto
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
 
-# Create your views heres
-
+# Resto de tus importaciones y código de vistas
 
 def catalogo(request, categoria=None):
     carrito = Carrito(request)
-    productos = Producto.objects.all()
-    ofertas = Producto.objects.filter(descuento__gt=0)
-    cant_productos = carrito.obtener_cantidad_total()
+    medicamentos = Medicamento.objects.all()  # Cambia Producto a Medicamento
+    ofertas = Medicamento.objects.filter(desc_medicamento__gt=0)  # Cambia descuento a desc_medicamento
+    cant_medicamentos = carrito.obtener_cantidad_total()  # Cambia obtener_cantidad_total a obtener_cantidad_total
 
     if categoria:
-        productos = productos.filter(categoria=categoria)
+        medicamentos = medicamentos.filter(categoria=categoria)
 
     context = {
-        'productos': productos,
+        'medicamentos': medicamentos,
         'categoria': categoria,
         'ofertas': ofertas,
-        'cant_productos': cant_productos,
+        'cant_medicamentos': cant_medicamentos,
     }
 
     return render(request, 'catalogos.html', context)
@@ -28,51 +27,46 @@ def catalogo(request, categoria=None):
 @login_required
 def carrito(request):
     carrito = Carrito(request)
-    cant_productos = carrito.obtener_cantidad_total()  # Obtén la cantidad total desde el objeto Carrito
+    cant_medicamentos = carrito.obtener_cantidad_total()  # Cambia obtener_cantidad_total a obtener_cantidad_total
 
     context = {
-        'cant_productos': cant_productos,
+        'cant_medicamentos': cant_medicamentos,
     }
 
     return render(request, 'pagcarrito.html', context)
 
-
 def tienda(request):
     carrito = Carrito(request)
-    cant_productos = carrito.obtener_cantidad_total()  # Obtén la cantidad total desde el objeto Carrito
+    cant_medicamentos = carrito.obtener_cantidad_total()  # Cambia obtener_cantidad_total a obtener_cantidad_total
 
-    productos = Producto.objects.all()
+    medicamentos = Medicamento.objects.all()  # Cambia Producto a Medicamento
 
     context = {
-        'productos': productos,
-        'cant_productos': cant_productos,
+        'medicamentos': medicamentos,
+        'cant_medicamentos': cant_medicamentos,
     }
 
     return render(request, "index.html", context)
 
-def agregar_producto(request, producto_id):
+def agregar_medicamento(request, medicamento_id):
     carrito = Carrito(request)
-    producto = Producto.objects.get(id=producto_id)
-    cantidad = int(request.POST.get('cantidad', 1))  # Obtiene la cantidad del formulario
-    carrito.agregar(producto, cantidad)
-
+    medicamento = Medicamento.objects.get(id_medicamento=medicamento_id)
+    cantidad = int(request.POST.get('cantidad', 1))
+    carrito.agregar(medicamento, cantidad)
     return redirect(request.META.get('HTTP_REFERER'))
 
 
-def eliminar_producto(request, producto_id):
+def eliminar_medicamento(request, medicamento_id):
     carrito = Carrito(request)
-    producto = Producto.objects.get(id=producto_id)
-    carrito.eliminar(producto)
-    
-
-def restar_producto(request, producto_id):
-    carrito = Carrito(request)
-    producto = Producto.objects.get(id=producto_id)
-    carrito.restar(producto)
-
-            
+    medicamento = Medicamento.objects.get(id_medicamento=medicamento_id)
+    carrito.eliminar(medicamento)
     return redirect(request.META.get('HTTP_REFERER'))
 
+def restar_medicamento(request, medicamento_id):
+    carrito = Carrito(request)
+    medicamento = Medicamento.objects.get(id_medicamento=medicamento_id)
+    carrito.restar(medicamento)
+    return redirect(request.META.get('HTTP_REFERER'))
 
 def limpiar_carrito(request):
     carrito = Carrito(request)

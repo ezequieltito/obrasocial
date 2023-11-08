@@ -1,5 +1,4 @@
 from django.shortcuts import render
-from app.models import correo
 from django.contrib.auth.decorators import login_required
 
 

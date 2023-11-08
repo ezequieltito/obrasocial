@@ -1,19 +1,17 @@
 from django.db import models
 
+class Medicamento(models.Model):
+    id_medicamento = models.AutoField(primary_key=True)
+    nombre_medicamento = models.CharField(max_length=150)
+    desc_medicamento = models.DecimalField(max_digits=5, decimal_places=2, default=0)
+    precio = models.IntegerField( null=True, blank=True)
+    categoria = models.CharField(max_length=33)  # Agregar campo para la categoría
 
-# Create your models here.
-class Producto(models.Model):
-    nombre = models.CharField(max_length=64)
-    categoria = models.CharField(max_length=33)
-    precio = models.IntegerField()  # Usar DecimalField para manejar decimales
-    descuento = models.DecimalField(max_digits=5, decimal_places=2, default=0)  # Agregar un valor predeterminado
-
-    @property
     def precio_con_descuento(self):
-        return self.precio - (self.precio * (self.descuento / 100))
+        if self.desc_medicamento is not None:
+            return self.precio - (self.precio * (self.desc_medicamento / 100))
+        else:
+            return self.precio
 
     def __str__(self):
-        return f'{self.nombre} -> $ {self.precio} (Descuento: {self.descuento}%)'
-
-    # Mantén este método para mantener la función __str__ existente
-
+        return f'{self.nombre_medicamento} -> $ {self.precio} (Descuento: {self.desc_medicamento}%)'
