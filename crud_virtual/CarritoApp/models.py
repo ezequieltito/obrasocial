@@ -15,3 +15,8 @@ class Medicamento(models.Model):
 
     def __str__(self):
         return f'{self.nombre_medicamento} -> $ {self.precio} (Descuento: {self.desc_medicamento}%)'
+    
+    class Meta:
+        managed = False
+        db_table = 'medicamentos'
+
