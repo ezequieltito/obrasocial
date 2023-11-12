@@ -4,30 +4,30 @@
 {% bootstrap_javascript %}
 
 {% block content %}
-<div style="display: flex; justify-content: start; align-items: center;">
+<div style="display: flex; justify-content: start; align-items: center; background-color: #333; border-top: 3px solid white; border-bottom: 3px solid white;">
     <div>
-        <h2 style="padding: 1rem;">Elige una categoría:</h2>
+        <h2 style="padding: 5px 1rem 0px 1rem; color: orange;">Elige una categoría:</h2>
     </div>
     <div class="dropdown">
-        <button class="btn btn-dark dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <button class="btn btn-dark dropdown-toggle" style="border: 2px solid white;" type="button" data-bs-toggle="dropdown" aria-expanded="false">
             Categorías
         </button>
         <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="{% url 'catalogos' categoria='Analgésicos' %}">Analgésicos</a></li>
-<li><a class="dropdown-item" href="{% url 'catalogos' categoria='Antiinflamatorios' %}">Antiinflamatorios</a></li>
-<li><a class="dropdown-item" href="{% url 'catalogos' categoria='Gastrointestinales' %}">Gastrointestinales</a></li>
-<li><a class="dropdown-item" href="{% url 'catalogos' categoria='Antibióticos' %}">Antibióticos</a></li>
-<li><a class="dropdown-item" href="{% url 'catalogos' categoria='Cardiovasculares' %}">Cardiovasculares</a></li>
-<li><a class="dropdown-item" href="{% url 'catalogos' categoria='Diabetes' %}">Diabetes</a></li>
-<li><a class="dropdown-item" href="{% url 'catalogos' categoria='Antialérgicos' %}">Antialérgicos</a></li>
-<li><a class="dropdown-item" href="{% url 'catalogos' categoria='Psiquiatría' %}">Psiquiatría</a></li>
-<li><a class="dropdown-item" href="{% url 'catalogos' categoria='Tiroides' %}">Tiroides</a></li>
-<li><a class="dropdown-item" href="{% url 'catalogos' categoria='Antifúngicos' %}">Antifúngicos</a></li>
-<li><a class="dropdown-item" href="{% url 'catalogos' categoria='Urología' %}">Urología</a></li>
-<li><a class="dropdown-item" href="{% url 'catalogos' categoria='Diuréticos' %}">Diuréticos</a></li>
-<li><a class="dropdown-item" href="{% url 'catalogos' categoria='Neurología' %}">Neurología</a></li>
-<li><a class="dropdown-item" href="{% url 'catalogos' categoria='Oftalmología' %}">Oftalmología</a></li>
-<li><a class="dropdown-item" href="{% url 'catalogos' categoria='Inmunosupresores' %}">Inmunosupresores</a></li>
+            <li><a class="dropdown-item" href="{% url 'catalogos' categoria='Antiinflamatorios' %}">Antiinflamatorios</a></li>
+            <li><a class="dropdown-item" href="{% url 'catalogos' categoria='Gastrointestinales' %}">Gastrointestinales</a></li>
+            <li><a class="dropdown-item" href="{% url 'catalogos' categoria='Antibióticos' %}">Antibióticos</a></li>
+            <li><a class="dropdown-item" href="{% url 'catalogos' categoria='Cardiovasculares' %}">Cardiovasculares</a></li>
+            <li><a class="dropdown-item" href="{% url 'catalogos' categoria='Diabetes' %}">Diabetes</a></li>
+            <li><a class="dropdown-item" href="{% url 'catalogos' categoria='Antialérgicos' %}">Antialérgicos</a></li>
+            <li><a class="dropdown-item" href="{% url 'catalogos' categoria='Psiquiatría' %}">Psiquiatría</a></li>
+            <li><a class="dropdown-item" href="{% url 'catalogos' categoria='Tiroides' %}">Tiroides</a></li>
+            <li><a class="dropdown-item" href="{% url 'catalogos' categoria='Antifúngicos' %}">Antifúngicos</a></li>
+            <li><a class="dropdown-item" href="{% url 'catalogos' categoria='Urología' %}">Urología</a></li>
+            <li><a class="dropdown-item" href="{% url 'catalogos' categoria='Diuréticos' %}">Diuréticos</a></li>
+            <li><a class="dropdown-item" href="{% url 'catalogos' categoria='Neurología' %}">Neurología</a></li>
+            <li><a class="dropdown-item" href="{% url 'catalogos' categoria='Oftalmología' %}">Oftalmología</a></li>
+            <li><a class="dropdown-item" href="{% url 'catalogos' categoria='Inmunosupresores' %}">Inmunosupresores</a></li>
 
             <li><a class="dropdown-item" href="{% url 'catalogos' %}">Todos los medicamentos</a></li>
         </ul>
@@ -35,9 +35,17 @@
 </div>
 
 {% if categoria %}
-    <h2>Catálogo de {{ categoria }}</h2>
+<div id="centrado">
+    <div id="contenido" >
+    <h1>Catálogo de {{ categoria }}</h1>
+    </div>
+  </div>
 {% else %}
-    <h2 style="margin-top: 10px;">Todos los Medicamentos</h2>
+<div id="centrado">
+    <div id="contenido" >
+    <h1>Todos los medicamentros</h1>
+    </div>
+  </div>
 {% endif %}
 
 <div class="row justify-content-center">

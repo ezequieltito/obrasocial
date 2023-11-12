@@ -1,6 +1,7 @@
 {% load django_bootstrap5 %}
 {% bootstrap_css %}
 {% bootstrap_javascript %}
+{% load static %}
 
 {% bootstrap_messages %}
 
@@ -14,7 +15,13 @@
   <link type="text/css" href="{% static 'styles.css' %}" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <style>
+  </style>
 </head>
+<body>
+
+  
 
 {% if messages %}
   {% for m in messages %}
@@ -27,7 +34,7 @@
       </script>
   {% endfor %}
 {% endif %}
-<div style="display: flex; justify-content: center; text-align: center; align-items: center ;background-color: #333; width: 6rem; height: 2rem; border-radius: 4px; margin: 1rem 1rem;">
+<div style="display: flex; justify-content: center; text-align: center; align-items: center ;background-color: #333; width: 6rem; height: 2rem; border-radius: 4px; margin: 1rem 1rem; border: 2px solid white;">
 <a href="{% url 'home' %}" class="card-link" style="text-align: center; color: white; text-decoration: none;">Ir al inicio</a>
 </div>
 
@@ -51,5 +58,5 @@
 
 </form>
 </div>
-
+</body>
   {%endblock content%}

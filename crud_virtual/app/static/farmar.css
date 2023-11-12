@@ -8,9 +8,8 @@
 
 body{
     padding:0px 0px;
-    background-color: rgb(243, 243, 243);
+    background-image: url('img/fondo1.jpg');
     font-family: sans-serif;
-    text-transform: capitalize;
     max-width: 100%;
 
 }
@@ -19,6 +18,7 @@ body{
 #navv{
     padding: 10px 20px;
 }
+
 .content-primary{
     padding: 10px 15px;
 }
@@ -37,7 +37,8 @@ body{
 #contenido {
     background-color: #333; /* Fondo del div */
     padding: 5px 10px;
-    color: white;
+    color: orange;
+    border: 4px solid white;
     border-radius: 10px; /* Bordes redondeados */
     text-align: center;
 }
@@ -96,6 +97,7 @@ section h2 {
     display: block; /* Elimina cualquier espacio en blanco adicional */
     margin: 0 auto; /* Centra la imagen horizontalmente */
 }
+
 
 
 @media (min-width: 795px) {

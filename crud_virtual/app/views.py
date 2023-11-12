@@ -10,6 +10,19 @@ from CarritoApp.carrito import Carrito  # Asegúrate de importar la clase Carrit
 
 # Resto de tus importaciones y código de vistas
 
+def preguntasfrecuentes(request):
+    return render(request, 'fotter/preguntasfrecuentes.html')
+
+def contacto(request):
+    return render(request, 'fotter/contacto.html')
+
+def servicios(request):
+    return render(request, 'fotter/servicios.html')
+
+def quienessomos(request):
+    return render(request, 'fotter/quienessomos.html')
+
+
 def index(request):
     carrito = Carrito(request)
     cant_medicamentos = carrito.obtener_cantidad_total()  # Cambia obtener_cantidad_total a obtener_cantidad_total

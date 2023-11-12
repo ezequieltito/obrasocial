@@ -1,0 +1,74 @@
+{% extends 'home.html' %}
+{% load static %}
+{% block content-home %}
+<head>
+    <style>
+
+        .contenedor-padre {
+            text-align: center; /* Alinea el contenido en el centro */
+        }
+
+        .contenedor-hijo {
+            border-radius: 20px;
+            display: inline-block;
+            color: #999999;
+            background-color: #333;
+            font-family: Arial, Helvetica, sans-serif;
+            text-align: center;
+            padding: 10px;
+            margin: auto;
+            width: 70%;
+        } 
+
+        .contenedor-hijo h1{
+            color: orange;
+        }
+
+        @media (max-width: 768px) {
+        .contenedor-hijo {
+          width: 90%;
+        }
+      }
+</style>
+</head>
+<body>
+
+    <div class="contenedor-padre">
+        <div class="contenedor-hijo">
+<h1>Nuesta Mission</h1>
+<p>La misión de la Obra Social ISDEM es proporcionar atención médica y acceso a medicamentos de </p>
+<p>calidad a sus afiliados, mejorando así su calidad de vida y acompañando el continuo crecimiento de </p>
+<p>la población en la capital de la Provincia de Salta. Nuestra empresa está comprometida con la salud </p>
+<p>y el bienestar de nuestros afiliados, y trabajamos constantemente para garantizar que tengan acceso </p>
+<p>a los servicios de atención médica más avanzados y a los tratamientos más efectivos. Además, nos </p>
+<p>esforzamos por mantener una relación cercana y de confianza con nuestros afiliados, brindándoles </p>
+<p>un servicio personalizado y de alta calidad.</p>
+
+<h1>Equipo De Profesionales</h1>
+<p>En Farmacia ISDEM, contamos con un equipo de profesionales altamente capacitados y </p>
+<p>apasionados por la atención de la salud. Nuestros farmacéuticos, técnicos de farmacia y </p>
+<p>personal de atención al cliente trabajan de la mano para brindar asesoramiento experto, </p>
+<p>responder a preguntas y garantizar que cada cliente reciba la atención personalizada que </p>
+<p>merece. Nuestra formación constante y conocimientos actualizados nos permiten ofrecer </p>
+<p>soluciones farmacéuticas basadas en la última evidencia científica.</p>
+
+<h1>Compromiso Con La Salud</h1>
+<p>Nuestro compromiso con la salud es fundamental en Farmacia ISDEM. Nos esforzamos </p>
+<p>por promover la salud y el bienestar de nuestra comunidad al proporcionar productos </p>
+<p>farmacéuticos de alta calidad y servicios de atención médica. Además de llenar recetas, </p>
+<p>ofrecemos servicios de consulta farmacéutica, administración de vacunas, y asesoramiento</p>
+<p>sobre el uso adecuado de medicamentos. Creemos en la importancia de educar a nuestros </p>
+<p>clientes sobre su salud y tratamientos para que tomen decisiones informadas.</p>
+
+<h1>Historia De Farmacia</h1>
+<p>Farmacia ISDEM abrió sus puertas por primera vez en 1985, cuando el Sr. Juan Pérez, un </p>
+<p>farmacéutico con una visión de mejorar la atención médica en nuestra comunidad, decidió</p>
+<p>establecer este negocio. Desde entonces, hemos crecido y evolucionado, adaptándonos a </p>
+<p>las necesidades cambiantes de nuestros clientes y la comunidad. Hoy en día, somos una </p>
+<p>farmacia de referencia en la zona, orgullosos de nuestro legado de servicio confiable y </p>
+<p>compromiso con la salud.</p>
+</div>
+</div> 
+    
+</body>
+{% endblock content-home %}

@@ -1,0 +1,69 @@
+{% extends 'home.html' %}
+{% load static %}
+{% block content-home %}
+<head>
+    <style>
+
+        .contenedor-padre {
+            text-align: center; /* Alinea el contenido en el centro */
+        }
+
+        .contenedor-hijo {
+            border-radius: 20px;
+            display: inline-block;
+            color: #999999;
+            background-color: #333;
+            font-family: Arial, Helvetica, sans-serif;
+            text-align: center;
+            padding: 10px;
+            margin: auto;
+            width: 70%;
+        } 
+
+        .contenedor-hijo h1{
+            color: orange;
+        }
+
+        @media (max-width: 768px) {
+        .contenedor-hijo {
+          width: 90%;
+        }
+      }
+</style>
+</head>
+<body>
+    <div class="contenedor-padre">
+        <div class="contenedor-hijo">
+<h1>Horarios De Atención</h1>
+<p>Nuestros horarios de atención varían, pero generalmente estamos abiertos de lunes a </p>
+<p>viernes de 9:00 AM a 7:00 PM y los sábados de 9:00 AM a 2:00 PM. Por favor, consulte</p>
+<p>nuestra página web o llámenos para conocer los horarios específicos de nuestra sucursal</p>
+<p>más cercana </p>
+
+<h1>Entrega A Domicilio</h1>
+<p>Sí, ofrecemos servicio de entrega a domicilio. Puede hacer su pedido a través de nuestra </p>
+<p>página web o llamando a nuestro equipo de atención al cliente. Nuestro personal se</p>
+<p>encargará de llevar sus medicamentos directamente a su puerta de manera segura y </p>
+<p>puntual</p>
+
+<h1>Recarga De Medicamentos En Linea</h1>
+<p>Para su comodidad, ofrecemos la opción de recargar sus medicamentos en línea a través </p>
+<p>de nuestro sitio web. Solo tiene que ingresar la información de su receta y sus datos, y </p>
+<p>nosotros nos encargaremos del resto. Además, le notificaremos cuando estén listos para</p>
+<p>ser recogidos o entregados.</p>
+
+<h1>Contacto Con El Equipo De Atención Al Cliente</h1>
+<p>Si tiene alguna pregunta o necesita asistencia, nuestro amable equipo de atención al cliente </p>
+<p>está a su disposición. Puede comunicarse con nosotros por teléfono o correo electrónico </p>
+<p>estamos aquí para ayudarle con cualquier inquietud que pueda tener.</p>
+
+<h1>Medidas De Seguridad En La Farmacia</h1>
+<p>La seguridad de nuestros clientes es una prioridad. Hemos implementado estrictas</p>
+<p>medidas de seguridad para garantizar que su experiencia en la farmacia sea segura. Esto </p>
+<p>incluye el uso de mascarillas, la desinfección frecuente de superficies y el distanciamiento </p>
+<p>social. Le pedimos que también colabore con nosotros siguiendo estas medidas para </p>
+<p>proteger a todos.</p>
+ </div>
+ </div>   
+</body>
+{% endblock content-home %}

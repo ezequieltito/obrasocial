@@ -25,7 +25,9 @@
           text-align: center;
         }
         .img-responsive {
-          width: 100%;
+          padding-top: 10px;
+          padding-bottom: 10px;
+          width: 90%;
           height: auto;
           display: block;
           margin: 0 auto;
@@ -317,7 +319,11 @@
         {% endif %}
     {% endwith %}
     {% else %}
-        <p>Inicie sesion para recibir ofertas</p>
+    <div id="centrado" >
+      <div id="contenido" style="color: orange;">
+      <h1>Iniciar Sesion para ofertas</h1>
+      </div>
+    </div>
     {% endif %}
     </div>
 

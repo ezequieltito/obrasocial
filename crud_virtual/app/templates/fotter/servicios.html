@@ -1,0 +1,66 @@
+{% extends 'home.html' %}
+{% load static %}
+{% block content-home %}
+<html>
+    <head>
+        <style>
+    
+            .contenedor-padre {
+                text-align: center; /* Alinea el contenido en el centro */
+            }
+    
+            .contenedor-hijo {
+                border-radius: 20px;
+                display: inline-block;
+                color: #999999;
+                background-color: #333;
+                font-family: Arial, Helvetica, sans-serif;
+                text-align: center;
+                padding: 10px;
+                margin: auto;
+                width: 70%;
+            } 
+    
+            .contenedor-hijo h1{
+                color: orange;
+            }
+    
+            @media (max-width: 768px) {
+            .contenedor-hijo {
+              width: 90%;
+            }
+          }
+    </style>
+    </head>
+<body>
+    
+    <div class="contenedor-padre">
+    <div class="contenedor-hijo">
+    <h1>Entrega a domicilio</h1>
+
+    <p>Llevamos la farmacia directamente a tu puerta. Haz tu pedido en línea y aprovecha</p>
+    <p>nuestro servicio de entrega a domicilio para mayor comodidad y tranquilidad.</p>
+    <h1>Asesoramiento farmaceutico</h1>
+
+    <p>Nuestros farmacéuticos altamente capacitados están listos para brindarte</p>
+    <p>asesoramiento personalizado. No dudes en consultarnos para obtener información</p>
+    <p>sobre tus medicamentos y cuidado de la salud.</p>
+    <h1>Control de la presion arterial</h1>
+
+    <p>En Obra social isdem, nos preocupamos por tu salud cardiovascular. Ofrecemos servicios</p>
+    <p>de medición de la presión arterial y asesoramiento para ayudarte a mantener tu presión </p> 
+    <p>bajo control.</p>
+    <h1>Medicion de glucosa</h1>
+
+    <p>te ofrecemos servicios de medición de glucosa y asesoramiento personalizado. Saber tus</p>
+    <p>niveles de azúcar en sangre es fundamental para una vida diaria saludable.</p>
+    <h1>Programas de bienestar</h1>
+
+    <p>Encontrar el equilibrio en la vida es esencial. Nuestros programas de bienestar te brindarán</p>
+    <p>>las herramientas y el apoyo necesarios para llevar una vida más saludable.</p>
+    <p>¡Únete a nosotros en este viaje!</p>
+</div>
+</div> 
+</body>
+
+{% endblock content-home %}
