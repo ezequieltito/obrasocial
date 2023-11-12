@@ -15,7 +15,8 @@
       }
       @media (min-width: 768px) {
         #carouselExampleDark {
-          width: 70%;
+          padding: 10px 0px;
+          width: 950%;
           max-width: 1200px;
         }
         .banner {
@@ -32,9 +33,11 @@
       }
     </style>
   </head>
-  <h1 style="padding: 1rem 1rem;">
-    Novedades:
-  </h1>
+  <div id="centrado">
+    <div id="contenido">
+      <h1>Novedades</h1>
+      </div>
+  </div>
 
   <div class="content-home">
     <div style="display: flex; justify-content: center; align-items: center;">
@@ -71,12 +74,19 @@
         </button>
       </div>
     </div>
+
+
+
+
+
     {% if request.user.is_authenticated %}
     {% with afiliado=request.user.afiliados %}
         {% if afiliado %}
             {% if afiliado.id_tipoPlan.id_tipoPlan == 1 %}
-            <div>
-              <h1 style="margin-top: 4rem;">Productos con el 25%:</h1>
+            <div id="centrado">
+              <div id="contenido">
+                <h1>Productos con el 25%:</h1>
+                </div>
               <div class="row justify-content-center">
                 {% for medicamento in medicamentos_con_descuento %}
                 {% if medicamento.desc_medicamento == 25 and medicamento.precio >= 1200 and medicamento.precio <= 1400 %}
@@ -111,8 +121,10 @@
               </div>
             </div>
             {% elif afiliado.id_tipoPlan.id_tipoPlan == 2 %}
-            <div>
-              <h1 style="margin-top: 4rem;">Productos con el 50%:</h1>
+            <div id="centrado">
+              <div id="contenido">
+                <h1>Productos con el 50%:</h1>
+                </div>
               <div class="row justify-content-center">
                 {% for medicamento in medicamentos_con_descuento %}
                 {% if medicamento.desc_medicamento == 50 and medicamento.precio >= 1200 and medicamento.precio <= 1400 %}
@@ -147,8 +159,10 @@
               </div>
             </div>
         
-            <div>
-              <h1 style="margin-top: 4rem;">Productos con el 25%:</h1>
+            <div id="centrado">
+              <div id="contenido">
+                <h1>Productos con el 25%:</h1>
+                </div>
               <div class="row justify-content-center">
                 {% for medicamento in medicamentos_con_descuento %}
                 {% if medicamento.desc_medicamento == 25 and medicamento.precio >= 1200 and medicamento.precio <= 1400 %}
@@ -183,8 +197,10 @@
               </div>
             </div>
             {% elif afiliado.id_tipoPlan.id_tipoPlan == 3 %}
-            <div>
-              <h1 style="margin-top: 4rem;">Productos con el 75%:</h1>
+            <div id="centrado">
+              <div id="contenido">
+                <h1>Productos con el 75%:</h1>
+                </div>
               <div class="row justify-content-center">
                 {% for medicamento in medicamentos_con_descuento %}
                 {% if medicamento.desc_medicamento == 75 and medicamento.precio >= 1200 and medicamento.precio <= 1400 %}
@@ -219,8 +235,10 @@
               </div>
             </div>
         
-            <div>
-              <h1 style="margin-top: 4rem;">Productos con el 50%:</h1>
+            <div id="centrado">
+              <div id="contenido">
+                <h1>Productos con el 50%:</h1>
+                </div>
               <div class="row justify-content-center">
                 {% for medicamento in medicamentos_con_descuento %}
                 {% if medicamento.desc_medicamento == 50 and medicamento.precio >= 1200 and medicamento.precio <= 1400 %}
@@ -255,8 +273,10 @@
               </div>
             </div>
         
-            <div>
-              <h1 style="margin-top: 4rem;">Productos con el 25%:</h1>
+            <div id="centrado">
+              <div id="contenido">
+                <h1>Productos con el 25%:</h1>
+                </div>
               <div class="row justify-content-center">
                 {% for medicamento in medicamentos_con_descuento %}
                 {% if medicamento.desc_medicamento == 25 and medicamento.precio >= 1200 and medicamento.precio <= 1400 %}
@@ -300,10 +320,17 @@
         <p>Inicie sesion para recibir ofertas</p>
     {% endif %}
     </div>
-    <div class="banner" style="margin-bottom: 4rem; margin-top: 4rem;">
-      <img src="{% static 'img/metodosdepago.jpg' %}" alt="Banner" class="img-responsive">
+
+
+  <div id="centrado">
+    <div id="contenido" >
+    <h1>Metodos de pago</h1>
     </div>
   </div>
+  <div class="banner" >
+    <img src="{% static 'img/metodosdepago.jpg' %}" alt="Banner" class="img-responsive">
+  </div>
+</div>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script>
     $(document).ready(function () {

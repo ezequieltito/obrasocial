@@ -7,11 +7,42 @@
 
 
 body{
-    padding:10px 20px;
+    padding:0px 0px;
     background-color: rgb(243, 243, 243);
     font-family: sans-serif;
     text-transform: capitalize;
+    max-width: 100%;
+
 }
+
+
+#navv{
+    padding: 10px 20px;
+}
+.content-primary{
+    padding: 10px 15px;
+}
+
+
+#centrado {
+    padding: 10px 0px 5px 0px;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    font-family: Arial, sans-serif;
+}
+
+#contenido {
+    background-color: #333; /* Fondo del div */
+    padding: 5px 10px;
+    color: white;
+    border-radius: 10px; /* Bordes redondeados */
+    text-align: center;
+}
+
+
 
 #titulo{
     padding: 10px 10px;
@@ -70,5 +101,11 @@ section h2 {
 @media (min-width: 795px) {
     .ancho-personalizado {
         width: 25rem;
+    }
+}
+
+@media (min-width: 795px) {
+    #contenido {
+        padding: 5px 200px;;
     }
 }

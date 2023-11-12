@@ -1,4 +1,4 @@
-{% load static %}
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -13,8 +13,6 @@
     
     <title>FARMACIA OS</title>
     <link rel="stylesheet" type="text/css" href="{% static 'farmar.css' %}">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
@@ -26,7 +24,7 @@
 
 
     {% include 'navbar.html' %}
-    
+    <div class="content-primary">
     {% block content %}
     {% endblock content %}
 
@@ -38,6 +36,7 @@
 
     {% block productos%}
     {% endblock productos%}
+    </div>
 
     {% include 'footer.html' %}
     
@@ -45,5 +44,5 @@
 
     <!-- <a href="webd.html" class="btn btn-success">loguin</a> -->
 
-
+</body>
 </html>
