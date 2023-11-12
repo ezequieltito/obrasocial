@@ -53,7 +53,7 @@
     {% for medicamento in medicamentos %}
     <div class="ancho-personalizado" style="height: auto; padding: 1rem 1rem;">
         <div class="card card border-dark mb-3">
-            <img src="{% static medicamento.url %}" class="card-img-top" style="height: 200px;" alt="...">
+            <img src="{% static medicamento.url %}" class="card-img-top" style="height: 250px; padding: 2rem;" alt="...">
             <div class="card-body">
                 <h5 class="card-title">{{ medicamento.nombre_medicamento }}</h5>
                 <p class="card-text">{{ medicamento.categoria }}</p>
