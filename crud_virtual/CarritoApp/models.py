@@ -2,6 +2,7 @@ from django.db import models
 
 class Medicamento(models.Model):
     id_medicamento = models.AutoField(primary_key=True)
+    url = models.CharField( max_length=250)
     nombre_medicamento = models.CharField(max_length=150)
     desc_medicamento = models.DecimalField(max_digits=5, decimal_places=2, default=0)
     precio = models.IntegerField( null=True, blank=True)

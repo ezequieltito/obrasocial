@@ -2,6 +2,7 @@
 {% load django_bootstrap5 %}
 {% bootstrap_css %}
 {% bootstrap_javascript %}
+{% load static %}
 
 {% block content %}
 <div style="display: flex; justify-content: start; align-items: center; background-color: #333; border-top: 3px solid white; border-bottom: 3px solid white;">
@@ -52,6 +53,7 @@
     {% for medicamento in medicamentos %}
     <div class="ancho-personalizado" style="height: auto; padding: 1rem 1rem;">
         <div class="card card border-dark mb-3">
+            <img src="{% static medicamento.url %}" class="card-img-top" style="height: 200px;" alt="...">
             <div class="card-body">
                 <h5 class="card-title">{{ medicamento.nombre_medicamento }}</h5>
                 <p class="card-text">{{ medicamento.categoria }}</p>
