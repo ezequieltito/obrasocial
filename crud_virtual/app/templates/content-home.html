@@ -35,6 +35,7 @@
   <h1 style="padding: 1rem 1rem;">
     Novedades:
   </h1>
+
   <div class="content-home">
     <div style="display: flex; justify-content: center; align-items: center;">
       <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
@@ -70,115 +71,235 @@
         </button>
       </div>
     </div>
-    <div>
-      <h1 style="margin-top: 4rem;">Productos con el 75%:</h1>
-      <div class="row justify-content-center">
-        {% for medicamento in medicamentos_con_descuento %}
-        {% if medicamento.desc_medicamento == 75 and medicamento.precio >= 1200 and medicamento.precio <= 1400 %}
-            <div class="ancho-personalizado" style="height: auto; padding: 1rem 1rem;">
-              <div class="card card border-dark mb-3">
-                <div class="card-body">
-                  <h5 class="card-title">{{ medicamento.nombre_medicamento }}</h5>
-                  <p class="card-text">{{ medicamento.categoria }}</p>
-                  <!-- Mostrar precio con descuento -->
-                  <p class="card-text">
-                    <span style="text-decoration: line-through;">$ {{ medicamento.precio }}</span>
-                    (Descuento: {{ medicamento.desc_medicamento|floatformat:0 }}%)
-                    <br>
-                    Precio con descuento: $ {{ medicamento.precio_con_descuento|floatformat:"2" }}
-                  </p>
-                  <div>
-                    <form method="post" action="{% url 'Add' medicamento.id_medicamento %}">
-                      {% csrf_token %}
-                      <div class="input-group" style="display: flex; align-items: center;">
-                        <button type="button" class="btn btn-secondary btn-minus">-</button>
-                        <input type="number" id="cantidad-{{ medicamento.id_medicamento }}" name="cantidad" value="1" min="1" style="max-width: 60px; margin-left: 2px; margin-right: 4px;">
-                        <button type="button" class="btn btn-secondary btn-plus">+</button>
-                        <button type="submit" class="btn btn-dark" style="margin-left: 10px;">Agregar al carrito</button>
+    {% if request.user.is_authenticated %}
+    {% with afiliado=request.user.afiliados %}
+        {% if afiliado %}
+            {% if afiliado.id_tipoPlan.id_tipoPlan == 1 %}
+            <div>
+              <h1 style="margin-top: 4rem;">Productos con el 25%:</h1>
+              <div class="row justify-content-center">
+                {% for medicamento in medicamentos_con_descuento %}
+                {% if medicamento.desc_medicamento == 25 and medicamento.precio >= 1200 and medicamento.precio <= 1400 %}
+                    <div class="ancho-personalizado" style="height: auto; padding: 1rem 1rem;">
+                      <div class="card card border-dark mb-3">
+                        <div class="card-body">
+                          <h5 class="card-title">{{ medicamento.nombre_medicamento }}</h5>
+                          <p class="card-text">{{ medicamento.categoria }}</p>
+                          <!-- Mostrar precio con descuento -->
+                          <p class="card-text">
+                            <span style="text-decoration: line-through;">$ {{ medicamento.precio }}</span>
+                            (Descuento: {{ medicamento.desc_medicamento|floatformat:0 }}%)
+                            <br>
+                            Precio con descuento: $ {{ medicamento.precio_con_descuento|floatformat:"2" }}
+                          </p>
+                          <div>
+                            <form method="post" action="{% url 'Add' medicamento.id_medicamento %}">
+                              {% csrf_token %}
+                              <div class="input-group" style="display: flex; align-items: center;">
+                                <button type="button" class="btn btn-secondary btn-minus">-</button>
+                                <input type="number" id="cantidad-{{ medicamento.id_medicamento }}" name="cantidad" value="1" min="1" style="max-width: 60px; margin-left: 2px; margin-right: 4px;">
+                                <button type="button" class="btn btn-secondary btn-plus">+</button>
+                                <button type="submit" class="btn btn-dark" style="margin-left: 10px;">Agregar al carrito</button>
+                              </div>
+                            </form>
+                          </div>
+                        </div>
                       </div>
-                    </form>
-                  </div>
-                </div>
+                    </div>
+                  {% endif %}
+                {% endfor %}
               </div>
             </div>
-          {% endif %}
-        {% endfor %}
-      </div>
-    </div>
-
-    <div>
-      <h1 style="margin-top: 4rem;">Productos con el 50%:</h1>
-      <div class="row justify-content-center">
-        {% for medicamento in medicamentos_con_descuento %}
-        {% if medicamento.desc_medicamento == 50 and medicamento.precio >= 1200 and medicamento.precio <= 1400 %}
-            <div class="ancho-personalizado" style="height: auto; padding: 1rem 1rem;">
-              <div class="card card border-dark mb-3">
-                <div class="card-body">
-                  <h5 class="card-title">{{ medicamento.nombre_medicamento }}</h5>
-                  <p class="card-text">{{ medicamento.categoria }}</p>
-                  <!-- Mostrar precio con descuento -->
-                  <p class="card-text">
-                    <span style="text-decoration: line-through;">$ {{ medicamento.precio }}</span>
-                    (Descuento: {{ medicamento.desc_medicamento|floatformat:0 }}%)
-                    <br>
-                    Precio con descuento: $ {{ medicamento.precio_con_descuento|floatformat:"2" }}
-                  </p>
-                  <div>
-                    <form method="post" action="{% url 'Add' medicamento.id_medicamento %}">
-                      {% csrf_token %}
-                      <div class="input-group" style="display: flex; align-items: center;">
-                        <button type="button" class="btn btn-secondary btn-minus">-</button>
-                        <input type="number" id="cantidad-{{ medicamento.id_medicamento }}" name="cantidad" value="1" min="1" style="max-width: 60px; margin-left: 2px; margin-right: 4px;">
-                        <button type="button" class="btn btn-secondary btn-plus">+</button>
-                        <button type="submit" class="btn btn-dark" style="margin-left: 10px;">Agregar al carrito</button>
+            {% elif afiliado.id_tipoPlan.id_tipoPlan == 2 %}
+            <div>
+              <h1 style="margin-top: 4rem;">Productos con el 50%:</h1>
+              <div class="row justify-content-center">
+                {% for medicamento in medicamentos_con_descuento %}
+                {% if medicamento.desc_medicamento == 50 and medicamento.precio >= 1200 and medicamento.precio <= 1400 %}
+                    <div class="ancho-personalizado" style="height: auto; padding: 1rem 1rem;">
+                      <div class="card card border-dark mb-3">
+                        <div class="card-body">
+                          <h5 class="card-title">{{ medicamento.nombre_medicamento }}</h5>
+                          <p class="card-text">{{ medicamento.categoria }}</p>
+                          <!-- Mostrar precio con descuento -->
+                          <p class="card-text">
+                            <span style="text-decoration: line-through;">$ {{ medicamento.precio }}</span>
+                            (Descuento: {{ medicamento.desc_medicamento|floatformat:0 }}%)
+                            <br>
+                            Precio con descuento: $ {{ medicamento.precio_con_descuento|floatformat:"2" }}
+                          </p>
+                          <div>
+                            <form method="post" action="{% url 'Add' medicamento.id_medicamento %}">
+                              {% csrf_token %}
+                              <div class="input-group" style="display: flex; align-items: center;">
+                                <button type="button" class="btn btn-secondary btn-minus">-</button>
+                                <input type="number" id="cantidad-{{ medicamento.id_medicamento }}" name="cantidad" value="1" min="1" style="max-width: 60px; margin-left: 2px; margin-right: 4px;">
+                                <button type="button" class="btn btn-secondary btn-plus">+</button>
+                                <button type="submit" class="btn btn-dark" style="margin-left: 10px;">Agregar al carrito</button>
+                              </div>
+                            </form>
+                          </div>
+                        </div>
                       </div>
-                    </form>
-                  </div>
-                </div>
+                    </div>
+                  {% endif %}
+                {% endfor %}
               </div>
             </div>
-          {% endif %}
-        {% endfor %}
-      </div>
-    </div>
-
-    <div>
-      <h1 style="margin-top: 4rem;">Productos con el 25%:</h1>
-      <div class="row justify-content-center">
-        {% for medicamento in medicamentos_con_descuento %}
-        {% if medicamento.desc_medicamento == 25 and medicamento.precio >= 1200 and medicamento.precio <= 1400 %}
-            <div class="ancho-personalizado" style="height: auto; padding: 1rem 1rem;">
-              <div class="card card border-dark mb-3">
-                <div class="card-body">
-                  <h5 class="card-title">{{ medicamento.nombre_medicamento }}</h5>
-                  <p class="card-text">{{ medicamento.categoria }}</p>
-                  <!-- Mostrar precio con descuento -->
-                  <p class="card-text">
-                    <span style="text-decoration: line-through;">$ {{ medicamento.precio }}</span>
-                    (Descuento: {{ medicamento.desc_medicamento|floatformat:0 }}%)
-                    <br>
-                    Precio con descuento: $ {{ medicamento.precio_con_descuento|floatformat:"2" }}
-                  </p>
-                  <div>
-                    <form method="post" action="{% url 'Add' medicamento.id_medicamento %}">
-                      {% csrf_token %}
-                      <div class="input-group" style="display: flex; align-items: center;">
-                        <button type="button" class="btn btn-secondary btn-minus">-</button>
-                        <input type="number" id="cantidad-{{ medicamento.id_medicamento }}" name="cantidad" value="1" min="1" style="max-width: 60px; margin-left: 2px; margin-right: 4px;">
-                        <button type="button" class="btn btn-secondary btn-plus">+</button>
-                        <button type="submit" class="btn btn-dark" style="margin-left: 10px;">Agregar al carrito</button>
+        
+            <div>
+              <h1 style="margin-top: 4rem;">Productos con el 25%:</h1>
+              <div class="row justify-content-center">
+                {% for medicamento in medicamentos_con_descuento %}
+                {% if medicamento.desc_medicamento == 25 and medicamento.precio >= 1200 and medicamento.precio <= 1400 %}
+                    <div class="ancho-personalizado" style="height: auto; padding: 1rem 1rem;">
+                      <div class="card card border-dark mb-3">
+                        <div class="card-body">
+                          <h5 class="card-title">{{ medicamento.nombre_medicamento }}</h5>
+                          <p class="card-text">{{ medicamento.categoria }}</p>
+                          <!-- Mostrar precio con descuento -->
+                          <p class="card-text">
+                            <span style="text-decoration: line-through;">$ {{ medicamento.precio }}</span>
+                            (Descuento: {{ medicamento.desc_medicamento|floatformat:0 }}%)
+                            <br>
+                            Precio con descuento: $ {{ medicamento.precio_con_descuento|floatformat:"2" }}
+                          </p>
+                          <div>
+                            <form method="post" action="{% url 'Add' medicamento.id_medicamento %}">
+                              {% csrf_token %}
+                              <div class="input-group" style="display: flex; align-items: center;">
+                                <button type="button" class="btn btn-secondary btn-minus">-</button>
+                                <input type="number" id="cantidad-{{ medicamento.id_medicamento }}" name="cantidad" value="1" min="1" style="max-width: 60px; margin-left: 2px; margin-right: 4px;">
+                                <button type="button" class="btn btn-secondary btn-plus">+</button>
+                                <button type="submit" class="btn btn-dark" style="margin-left: 10px;">Agregar al carrito</button>
+                              </div>
+                            </form>
+                          </div>
+                        </div>
                       </div>
-                    </form>
-                  </div>
-                </div>
+                    </div>
+                  {% endif %}
+                {% endfor %}
               </div>
             </div>
-          {% endif %}
-        {% endfor %}
-      </div>
+            {% elif afiliado.id_tipoPlan.id_tipoPlan == 3 %}
+            <div>
+              <h1 style="margin-top: 4rem;">Productos con el 75%:</h1>
+              <div class="row justify-content-center">
+                {% for medicamento in medicamentos_con_descuento %}
+                {% if medicamento.desc_medicamento == 75 and medicamento.precio >= 1200 and medicamento.precio <= 1400 %}
+                    <div class="ancho-personalizado" style="height: auto; padding: 1rem 1rem;">
+                      <div class="card card border-dark mb-3">
+                        <div class="card-body">
+                          <h5 class="card-title">{{ medicamento.nombre_medicamento }}</h5>
+                          <p class="card-text">{{ medicamento.categoria }}</p>
+                          <!-- Mostrar precio con descuento -->
+                          <p class="card-text">
+                            <span style="text-decoration: line-through;">$ {{ medicamento.precio }}</span>
+                            (Descuento: {{ medicamento.desc_medicamento|floatformat:0 }}%)
+                            <br>
+                            Precio con descuento: $ {{ medicamento.precio_con_descuento|floatformat:"2" }}
+                          </p>
+                          <div>
+                            <form method="post" action="{% url 'Add' medicamento.id_medicamento %}">
+                              {% csrf_token %}
+                              <div class="input-group" style="display: flex; align-items: center;">
+                                <button type="button" class="btn btn-secondary btn-minus">-</button>
+                                <input type="number" id="cantidad-{{ medicamento.id_medicamento }}" name="cantidad" value="1" min="1" style="max-width: 60px; margin-left: 2px; margin-right: 4px;">
+                                <button type="button" class="btn btn-secondary btn-plus">+</button>
+                                <button type="submit" class="btn btn-dark" style="margin-left: 10px;">Agregar al carrito</button>
+                              </div>
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  {% endif %}
+                {% endfor %}
+              </div>
+            </div>
+        
+            <div>
+              <h1 style="margin-top: 4rem;">Productos con el 50%:</h1>
+              <div class="row justify-content-center">
+                {% for medicamento in medicamentos_con_descuento %}
+                {% if medicamento.desc_medicamento == 50 and medicamento.precio >= 1200 and medicamento.precio <= 1400 %}
+                    <div class="ancho-personalizado" style="height: auto; padding: 1rem 1rem;">
+                      <div class="card card border-dark mb-3">
+                        <div class="card-body">
+                          <h5 class="card-title">{{ medicamento.nombre_medicamento }}</h5>
+                          <p class="card-text">{{ medicamento.categoria }}</p>
+                          <!-- Mostrar precio con descuento -->
+                          <p class="card-text">
+                            <span style="text-decoration: line-through;">$ {{ medicamento.precio }}</span>
+                            (Descuento: {{ medicamento.desc_medicamento|floatformat:0 }}%)
+                            <br>
+                            Precio con descuento: $ {{ medicamento.precio_con_descuento|floatformat:"2" }}
+                          </p>
+                          <div>
+                            <form method="post" action="{% url 'Add' medicamento.id_medicamento %}">
+                              {% csrf_token %}
+                              <div class="input-group" style="display: flex; align-items: center;">
+                                <button type="button" class="btn btn-secondary btn-minus">-</button>
+                                <input type="number" id="cantidad-{{ medicamento.id_medicamento }}" name="cantidad" value="1" min="1" style="max-width: 60px; margin-left: 2px; margin-right: 4px;">
+                                <button type="button" class="btn btn-secondary btn-plus">+</button>
+                                <button type="submit" class="btn btn-dark" style="margin-left: 10px;">Agregar al carrito</button>
+                              </div>
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  {% endif %}
+                {% endfor %}
+              </div>
+            </div>
+        
+            <div>
+              <h1 style="margin-top: 4rem;">Productos con el 25%:</h1>
+              <div class="row justify-content-center">
+                {% for medicamento in medicamentos_con_descuento %}
+                {% if medicamento.desc_medicamento == 25 and medicamento.precio >= 1200 and medicamento.precio <= 1400 %}
+                    <div class="ancho-personalizado" style="height: auto; padding: 1rem 1rem;">
+                      <div class="card card border-dark mb-3">
+                        <div class="card-body">
+                          <h5 class="card-title">{{ medicamento.nombre_medicamento }}</h5>
+                          <p class="card-text">{{ medicamento.categoria }}</p>
+                          <!-- Mostrar precio con descuento -->
+                          <p class="card-text">
+                            <span style="text-decoration: line-through;">$ {{ medicamento.precio }}</span>
+                            (Descuento: {{ medicamento.desc_medicamento|floatformat:0 }}%)
+                            <br>
+                            Precio con descuento: $ {{ medicamento.precio_con_descuento|floatformat:"2" }}
+                          </p>
+                          <div>
+                            <form method="post" action="{% url 'Add' medicamento.id_medicamento %}">
+                              {% csrf_token %}
+                              <div class="input-group" style="display: flex; align-items: center;">
+                                <button type="button" class="btn btn-secondary btn-minus">-</button>
+                                <input type="number" id="cantidad-{{ medicamento.id_medicamento }}" name="cantidad" value="1" min="1" style="max-width: 60px; margin-left: 2px; margin-right: 4px;">
+                                <button type="button" class="btn btn-secondary btn-plus">+</button>
+                                <button type="submit" class="btn btn-dark" style="margin-left: 10px;">Agregar al carrito</button>
+                              </div>
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  {% endif %}
+                {% endfor %}
+              </div>
+            </div>
+            {% else %}
+                <p>No posee un tipo de plan</p>
+            {% endif %}
+        {% else %}
+        {% endif %}
+    {% endwith %}
+    {% else %}
+        <p>Inicie sesion para recibir ofertas</p>
+    {% endif %}
     </div>
-
-
     <div class="banner" style="margin-bottom: 4rem; margin-top: 4rem;">
       <img src="{% static 'img/metodosdepago.jpg' %}" alt="Banner" class="img-responsive">
     </div>
