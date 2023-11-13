@@ -35,6 +35,17 @@ def carrito(request):
 
     return render(request, 'pagcarrito.html', context)
 
+def detalle(request):
+    carrito = Carrito(request)
+    cant_medicamentos = carrito.obtener_cantidad_total()  # Cambia obtener_cantidad_total a obtener_cantidad_total
+
+    context = {
+        'cant_medicamentos': cant_medicamentos,
+        
+    }
+
+    return render(request, 'detalle.html', context)
+
 def tienda(request):
     carrito = Carrito(request)
     cant_medicamentos = carrito.obtener_cantidad_total()  # Cambia obtener_cantidad_total a obtener_cantidad_total

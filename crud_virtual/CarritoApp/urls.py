@@ -4,6 +4,7 @@ from . import views
 urlpatterns = [
     path('tienda/', views.tienda, name='tienda'),
     path('pagcarrito/', views.carrito, name='pagcarrito'),
+    path('detalle/', views.detalle, name='detalle'),
     path('catalogos/', views.catalogo, name='catalogos'),
     path('catalogos/<str:categoria>/', views.catalogo, name='catalogos'),  # Incluye el parámetro "categoria"
     path('agregar/<int:medicamento_id>/', views.agregar_medicamento, name='Add'),  # Cambia "producto_id" a "medicamento_id"
