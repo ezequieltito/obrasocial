@@ -129,6 +129,19 @@ class TipoPlanes(models.Model):
         managed = False
         db_table = 'tipo_planes'
 
+class Direcciones(models.Model):
+    id_direccion = models.AutoField(primary_key=True)
+    calle = models.CharField(max_length=300)
+    numero = models.IntegerField()
+    id_codPostal = models.IntegerField()
+
+    def __str__(self):
+        return f"{self.calle} {self.numero}"
+
+    class Meta:
+        managed = False
+        db_table = 'direcciones'
+
 
 class Afiliados(models.Model):
     id_afi = models.AutoField(primary_key=True)

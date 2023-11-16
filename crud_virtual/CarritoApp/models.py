@@ -21,3 +21,15 @@ class Medicamento(models.Model):
         managed = False
         db_table = 'medicamentos'
 
+class Stock(models.Model):
+    id_stock = models.AutoField(primary_key=True)
+    id_medicamento = models.ForeignKey('Medicamento', models.DO_NOTHING, db_column='id_medicamento')
+    cantidad = models.IntegerField()
+
+    def __str__(self):
+        return f'{self.id_medicamento.nombre_medicamento} - Cantidad: {self.cantidad}'
+
+    class Meta:
+        managed = False
+        db_table = 'stock'
+

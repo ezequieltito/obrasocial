@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.models import User, Group
-from .models import Afiliados, TipoPlanes
+from .models import Afiliados, TipoPlanes,Direcciones
 
 class CustomLoginForm(AuthenticationForm):
     # Puedes personalizar el formulario aquí si es necesario
@@ -17,10 +17,19 @@ class CustomLoginForm(AuthenticationForm):
 
 class CustomUserCreationForm(UserCreationForm):
     email = forms.EmailField(required=True)
-    # Agrega el campo de selección desde el modelo TipoPlanes
     id_tipoPlan = forms.ModelChoiceField(queryset=TipoPlanes.objects.all(), required=False)
-    # Agrega el campo de entrada para el dni_afi
-    dni_afi = forms.IntegerField(required=False)
+    documento = forms.IntegerField(label='Documento', required=False)
+    tel_afi = forms.IntegerField(label='Teléfono', required=False)
+    fecha_nac_afi = forms.DateField(
+        label='Fecha de Nacimiento',
+        widget=forms.DateInput(attrs={'type': 'date'}),
+        required=False
+    )
+    provincia = forms.CharField(max_length=100, initial="Salta", widget=forms.TextInput(attrs={'readonly': 'readonly'}))
+    localidad = forms.CharField(max_length=100, initial="Salta Capital", widget=forms.TextInput(attrs={'readonly': 'readonly'}))
+    calle = forms.CharField(max_length=300, required=True)
+    numero = forms.IntegerField(required=True)
+
 
     class Meta:
         model = User
@@ -28,29 +37,39 @@ class CustomUserCreationForm(UserCreationForm):
 
     def clean_email(self):
         email = self.cleaned_data['email']
-
         if User.objects.filter(email=email).exists():
             raise forms.ValidationError('Este correo electrónico ya está registrado')
         return email
     
     def save(self, commit=True):
         user = super().save(commit=False)
-        user.save()        
-        # Guarda el campo de selección en el modelo Afiliados
+        user.save()
+
+        direccion = Direcciones.objects.create(
+            calle=self.cleaned_data['calle'],
+            numero=self.cleaned_data['numero'],
+        )
+        user.direccion = direccion
+        user.save()
+
         id_tipoPlan = self.cleaned_data.get('id_tipoPlan')
-        dni_afi = self.cleaned_data.get('dni_afi')
+        documento = self.cleaned_data.get('documento')
+        tel_afi = self.cleaned_data.get('tel_afi')
+        fecha_nac_afi = self.cleaned_data.get('fecha_nac_afi')
+
         if id_tipoPlan:
             afiliado = Afiliados.objects.create(
                 user=user,
                 id_tipoPlan=id_tipoPlan,
-                # Agrega otros campos según sea necesario
                 nombre_afi=user.first_name,
                 apellido_afi=user.last_name,
-                dni_afi=dni_afi,
-                user_id=user.id,
+                dni_afi=documento,
+                id_direccion=direccion.id_direccion,  # Ajusta el nombre según tu modelo
+                mail_afi=user.email,
+                tel_afi=tel_afi,
+                fecha_nac_afi=fecha_nac_afi,
             )
 
-        # Una vez que el usuario se ha guardado en la base de datos, agrégalo al grupo "Usuario" por defecto
         grupo_usuario, created = Group.objects.get_or_create(name='Usuario')
         user.groups.add(grupo_usuario)
         return user

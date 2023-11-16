@@ -14,6 +14,9 @@
 <head>
   <link type="text/css" href="{% static 'styles.css' %}" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
 
 <div style="display: flex; justify-content: center; text-align: center; align-items: center ;background-color: #333; width: 6rem; height: 2rem; border-radius: 4px; margin: 1rem 1rem;">
@@ -39,4 +42,28 @@
 </form>
 </div>
 
+
+{% with afiliado=request.user.afiliados %}
+<div class="row mb-4">
+<h4>Detalles de Envio</h4>
+<div class="col-md-6"></div>
+    <p><strong>Provincia:</strong> Salta</p>
+    <p><strong>Localidad:</strong> Salta Capital</p>
+</div>
+<div class="col-md-6"></div>
+  {% if direccion %}
+
+  
+    <p><strong>Calle:</strong> {{ direccion.calle }}</p>
+    <p><strong>Número:</strong>{{ direccion.numero }}</p>
+  
+  {% endif %}
+</div>
+
+</div>
+{% endwith %}
+<script>
+  $(function() {
+  });
+</script>
   {%endblock content%}

@@ -21,30 +21,48 @@
                 <div >
                     <div class="row justify-content-center">
                         {% for medicamento in medicamentos %}
-                        <div class="ancho-personalizado" style=" height: auto; padding: 1rem 1rem;">
-                            <div class="card card border-dark mb-3">
-                                <img src="{% static medicamento.url %}" class="card-img-top" style="height: 250px; padding: 2rem;" alt="...">
-                                <div class="card-body">
-                                    <h5 class="card-title">{{ medicamento.nombre_medicamento }}</h5>
-                                    <p class="card-text">{{ medicamento.categoria }}</p>
-                                    <p class="card-text">$ {{ medicamento.precio }}</p>
-                                    <div>
-                                        <form method="post" action="{% url 'Add' medicamento.id_medicamento %}">
-                                            {% csrf_token %}
-                                            <div class="input-group" style="display: flex; align-items: center;">
-                                                <button type="button" class="btn btn-secondary btn-minus">-</button>
-                                                <input type="number" id="cantidad-{{ medicamento.id_medicamento }}" name="cantidad" value="1" min="1" style="max-width: 60px; margin-left: 2px; margin-right: 4px;">
-                                                <button type="button" class="btn btn-secondary btn-plus">+</button>
-                                                <button type="submit" class="btn btn-dark" style="margin-left: 10px;">Agregar al carrito</button>
-                                            </div>
+                            <div class="ancho-personalizado" style="height: auto; padding: 1rem 1rem;">
+                                <div class="card card border-dark mb-3">
+                                    <img src="{% static medicamento.url %}" class="card-img-top" style="height: 250px; padding: 2rem;" alt="...">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ medicamento.nombre_medicamento }}</h5>
+                                        <p class="card-text">{{ medicamento.categoria }}</p>
+                                        <p class="card-text">$ {{ medicamento.precio }}</p>
+                                        
+                                        {% with medicamento.stock_set.first as stock %}
+                                            {% if stock %}
+                                                <p class="card-text">En stock: {{ stock.cantidad }}</p>
+                                            {% else %}
+                                                <p class="card-text">Sin stock</p>
+                                            {% endif %}
+                                        {% endwith %}
+                    
 
-                                        </form>                                      
+                                        {% with medicamento.stock_set.first as stock %}
+                                        <div>
+                                            <form method="post" action="{% url 'Add' medicamento.id_medicamento %}">
+                                                {% csrf_token %}
+                                                <div class="input-group" style="display: flex; align-items: center;">
+                                                    {% if stock and stock.cantidad > 0 %}
+                                                    <button type="button" class="btn btn-secondary btn-minus">-</button>
+                                                    <input type="number" id="cantidad-{{ medicamento.id_medicamento }}" name="cantidad" value="1" min="1" style="max-width: 60px; margin-left: 2px; margin-right: 4px;">
+                                                    <button type="button" class="btn btn-secondary btn-plus">+</button>
+                                                        <button type="submit" class="btn btn-dark" style="margin-left: 10px;">Agregar al carrito</button>
+                                                    {% else %}
+                                                        <button type="button" class="btn btn-dark" style="margin-left: 10px;" disabled>No hay stock</button>
+                                                    {% endif %}
+                                                </div>
+                                            </form>
+                                        </div>
+                                    {% endwith %}
                                     </div>
                                 </div>
                             </div>
-                        </div>
                         {% endfor %}
                     </div>
+                    
+                    
+                    
                 </div>
             </div>
         </div>

@@ -1,6 +1,8 @@
 from django.shortcuts import render, HttpResponse
+
+from app.models import Direcciones
 from .carrito import Carrito
-from .models import Medicamento  # Importa el modelo Medicamento en lugar de Producto
+from .models import Medicamento, Stock  # Importa el modelo Medicamento en lugar de Producto
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
 
@@ -36,21 +38,24 @@ def carrito(request):
     return render(request, 'pagcarrito.html', context)
 
 def detalle(request):
-    carrito = Carrito(request)
-    cant_medicamentos = carrito.obtener_cantidad_total()  # Cambia obtener_cantidad_total a obtener_cantidad_total
+    afiliado = request.user.afiliados
+    direccion = Direcciones.objects.get(pk=afiliado.id_direccion)
+    cant_medicamentos = Carrito(request).obtener_cantidad_total()
 
     context = {
         'cant_medicamentos': cant_medicamentos,
-        
+        'afiliado': afiliado,
+        'direccion': direccion,
     }
 
     return render(request, 'detalle.html', context)
 
+
 def tienda(request):
     carrito = Carrito(request)
-    cant_medicamentos = carrito.obtener_cantidad_total()  # Cambia obtener_cantidad_total a obtener_cantidad_total
+    cant_medicamentos = carrito.obtener_cantidad_total()
 
-    medicamentos = Medicamento.objects.all()  # Cambia Producto a Medicamento
+    medicamentos = Medicamento.objects.all()
 
     context = {
         'medicamentos': medicamentos,

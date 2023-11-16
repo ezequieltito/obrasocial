@@ -2,29 +2,25 @@
 {% load django_bootstrap5 %}
 {% bootstrap_css %}
 {% bootstrap_javascript %}
-
-
-
+{% load static %}
 
 {% block content %}
 <style>
-
-
     .container {
         background-color: #ffffff;
-        margin-top: 20px; /* Espaciado superior */
-        border: 1px solid #dddddd; /* Borde gris */
-        padding: 20px; /* Espaciado interno */
-        border-radius: 10px; /* Bordes redondeados */
+        margin-top: 20px;
+        border: 1px solid #dddddd;
+        padding: 20px;
+        border-radius: 10px;
     }
 
     h2 {
-        color: #333333; /* Color del texto del título */
+        color: #333333;
     }
 
     table {
         width: 100%;
-        margin-bottom: 20px; /* Espaciado inferior */
+        margin-bottom: 20px;
         border-collapse: collapse;
     }
 
@@ -47,73 +43,64 @@
         margin-bottom: 5px;
     }
 
-    input, select {
-        width: 100%;
-        padding: 10px;
-        margin-bottom: 10px;
-        border: 1px solid #dddddd;
-        border-radius: 5px;
-    }
-
-    .btn {
-        padding: 10px 20px;
-        text-decoration: none;
-        color: #ffffff;
-        background-color: #007bff; /* Color azul para el botón */
-        border-radius: 5px;
-        cursor: pointer;
-    }
-
-    .btn-danger {
-        background-color: #dc3545; /* Color rojo para el botón de Limpiar */
-    }
-
     .text-center {
         text-align: center;
     }
 
     .alert-dark {
-        background-color: #343a40; /* Color de fondo gris oscuro para la alerta sin medicamentos */
+        background-color: #343a40;
         color: #ffffff;
     }
 </style>
 
 <div class="boddy">
-  
+    <div class="container">
+        <h2 class="text-center">Detalle de Compra</h2>
+        <h5 style="text-align: right;"><strong>Fecha de Hoy:</strong> {% now "d-m-Y" %}</h5>
 
-<div class="container">
-    <h2 class="text-center">Detalle de Compra</h2>
+        <!-- Información del Afiliado -->
+        {% with afiliado=request.user.afiliados %}
+            <div class="row mb-4">
+                <h4>Información del Afiliado</h4>
+                <div class="col-md-6">
+                    <p><strong>Nombre:</strong> {{ afiliado.nombre_afi }}</p>
+                    <p><strong>Apellido:</strong> {{ afiliado.apellido_afi }}</p>
+                    <p><strong>DNI:</strong> {{ afiliado.dni_afi }}</p>
+                </div>
+                <div class="col-md-6">
+                    <p><strong>Fecha de Nacimiento:</strong> {{ afiliado.fecha_nac_afi }}</p>
+                    <p><strong>Teléfono:</strong> {{ afiliado.tel_afi }}</p>
+                    <p><strong>Correo:</strong> {{ afiliado.mail_afi }}</p>
+                </div>
+            </div>
 
-    <!-- Información del Afiliado -->
-    {% with afiliado=request.user.afiliados %}
-    <div class="row mb-4">
-      <h4>Información del Afiliado</h4>
-      <div class="col-md-6">
-          
-          <p><strong>Nombre:</strong> {{ afiliado.nombre_afi }}</p>
-          <p><strong>Apellido:</strong> {{ afiliado.apellido_afi }}</p>
-          <p><strong>DNI:</strong> {{ afiliado.dni_afi }}</p>
-      </div>
-      <div class="col-md-6">
-          <p><strong>Fecha de Nacimiento:</strong> {{ afiliado.fecha_nac_afi }}</p>
-          <p><strong>Teléfono:</strong> {{ afiliado.tel_afi }}</p>
-          <p><strong>Correo:</strong> {{ afiliado.mail_afi }}</p>
-      </div>
-  </div>
-    {% endwith %}
+            <div class="row mb-4">
+                <h4>Detalles de Envío</h4>
+                <div class="col-md-6">
+                    <p><strong>Provincia:</strong> Salta</p>
+                    <p><strong>Localidad:</strong> Salta Capital</p>
+                </div>
+                <div class="col-md-6">
+                    {% if direccion %}
+                        <p><strong>Calle:</strong> {{ direccion.calle }}</p>
+                        <p><strong>Número:</strong> {{ direccion.numero }}</p>
+                    {% endif %}
+                </div>
+            </div>
+        {% endwith %}
 
-    <!-- Detalles del Carrito -->
-    {% if request.session.carrito.items %}
-    <h4>Compra</h4>
-        <table class="table">
-            <thead>
+        <!-- Detalles del Carrito -->
+        {% if request.session.carrito.items %}
+            <h4>Compra</h4>
+            <table class="table">
+                <thead>
                 <tr>
                     <th scope="col">Nombre</th>
                     <th scope="col">Cantidad</th>
                     <th scope="col">Subtotal</th>
                 </tr>
-            </thead>
-            <tbody>
+                </thead>
+                <tbody>
                 {% for key, value in request.session.carrito.items %}
                     <tr>
                         <td>{{ value.nombre }}</td>
@@ -126,53 +113,18 @@
                     <td colspan="2" class="text-right"><strong>Total:</strong></td>
                     <td><strong>$ {{ total_carrito }}</strong></td>
                 </tr>
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+        {% else %}
+            <div class="alert alert-dark text-center">Sin Medicamentos</div>
+        {% endif %}
 
-        <!-- Dirección de Envío como inputs -->
-        <div class="row mb-4">
-            <div class="col">
-                <h4>Dirección de Envío</h4>
-                <label for="provincia">Provincia:</label>
-                <input type="text" id="provincia" name="provincia" value="{{ afiliado.id_direccion.provincia }}" class="form-control">
-
-                <label for="localidad">Localidad:</label>
-                <input type="text" id="localidad" name="localidad" value="{{ afiliado.id_direccion.localidad }}" class="form-control">
-
-                <label for="calle">Calle:</label>
-                <input type="text" id="calle" name="calle" value="{{ afiliado.id_direccion.calle }}" class="form-control">
-
-                <label for="numeracion">Numeración:</label>
-                <input type="text" id="numeracion" name="numeracion" value="{{ afiliado.id_direccion.numeracion }}" class="form-control">
-
-                <!-- Puedes agregar otros campos según sea necesario -->
-
-            </div>
+        <!-- Botones -->
+        <div class="row text-center">
+            <div class="col-6"><a href="{% url 'pagcarrito' %}" class="btn btn-danger">Volver al carrito</a></div>
+            <div class="col-6"><button onclick="generarPDF()" class="btn btn-warning">Generar PDF</button></div>
         </div>
-
-        <!-- Método de Pago como input -->
-        <div class="row mb-4">
-            <div class="col">
-                <h4>Método de Pago</h4>
-                <label for="metodo_pago">Seleccione un método de pago:</label>
-                <select id="metodo_pago" name="metodo_pago" class="form-control">
-                    <option value="efectivo">Efectivo</option>
-                    <option value="tarjeta">Tarjeta de Crédito</option>
-                </select>
-            </div>
-        </div>
-
-    {% else %}
-        <div class="alert alert-dark text-center">Sin Medicamentos</div>
-    {% endif %}
-
-    <!-- Botones -->
-    <div class="row text-center">
-        <div class="col-6"><a href="{% url 'CLS' %}" class="btn btn-danger">Limpiar</a></div>
-        <div class="col-6"><a href="" class="btn btn-dark">Guardar</a></div>
     </div>
-    <!-- Agrega un enlace o botón para redirigir al usuario a la URL de pago de Mercado Pago -->
-</div>
 </div>
 
 
