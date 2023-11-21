@@ -1,12 +1,11 @@
 from django.shortcuts import render, HttpResponse
 
+
 from app.models import Direcciones
 from .carrito import Carrito
 from .models import Medicamento, Stock  # Importa el modelo Medicamento en lugar de Producto
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
-
-# Resto de tus importaciones y código de vistas
 
 def catalogo(request, categoria=None):
     carrito = Carrito(request)

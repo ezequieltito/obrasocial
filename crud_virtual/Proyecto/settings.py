@@ -33,7 +33,6 @@ MESSAGE_STORAGE = "django.contrib.messages.storage.cookie.CookieStorage"
 # Application definition
 
 INSTALLED_APPS = [
-    'xhtml2pdf',
     'crispy_forms',
     'crispy_bootstrap5',
     'django_bootstrap5',
